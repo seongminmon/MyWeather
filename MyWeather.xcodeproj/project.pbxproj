@@ -13,6 +13,8 @@
 		2466E3532C4155C000D675B2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 2466E3522C4155C000D675B2 /* Base */; };
 		2466E3552C4155C100D675B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2466E3542C4155C100D675B2 /* Assets.xcassets */; };
 		2466E3582C4155C100D675B2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 2466E3572C4155C100D675B2 /* Base */; };
+		2466E3602C41565200D675B2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2466E35F2C41565200D675B2 /* .gitignore */; };
+		2466E3622C41566900D675B2 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3612C41566800D675B2 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		2466E3542C4155C100D675B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2466E3572C4155C100D675B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2466E3592C4155C200D675B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2466E35F2C41565200D675B2 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		2466E3612C41566800D675B2 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,7 @@
 		2466E33F2C4155C000D675B2 = {
 			isa = PBXGroup;
 			children = (
+				2466E35F2C41565200D675B2 /* .gitignore */,
 				2466E34A2C4155C000D675B2 /* MyWeather */,
 				2466E3492C4155C000D675B2 /* Products */,
 			);
@@ -56,6 +61,7 @@
 		2466E34A2C4155C000D675B2 /* MyWeather */ = {
 			isa = PBXGroup;
 			children = (
+				2466E3612C41566800D675B2 /* APIKey.swift */,
 				2466E34B2C4155C000D675B2 /* AppDelegate.swift */,
 				2466E34D2C4155C000D675B2 /* SceneDelegate.swift */,
 				2466E34F2C4155C000D675B2 /* ViewController.swift */,
@@ -125,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2466E3602C41565200D675B2 /* .gitignore in Resources */,
 				2466E3552C4155C100D675B2 /* Assets.xcassets in Resources */,
 				2466E3582C4155C100D675B2 /* Base in Resources */,
 				2466E3532C4155C000D675B2 /* Base in Resources */,
@@ -140,6 +147,7 @@
 			files = (
 				2466E3502C4155C000D675B2 /* ViewController.swift in Sources */,
 				2466E34C2C4155C000D675B2 /* AppDelegate.swift in Sources */,
+				2466E3622C41566900D675B2 /* APIKey.swift in Sources */,
 				2466E34E2C4155C000D675B2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
