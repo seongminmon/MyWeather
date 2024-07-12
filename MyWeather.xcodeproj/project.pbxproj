@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		2466E34C2C4155C000D675B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E34B2C4155C000D675B2 /* AppDelegate.swift */; };
 		2466E34E2C4155C000D675B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E34D2C4155C000D675B2 /* SceneDelegate.swift */; };
-		2466E3502C4155C000D675B2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E34F2C4155C000D675B2 /* ViewController.swift */; };
-		2466E3532C4155C000D675B2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 2466E3522C4155C000D675B2 /* Base */; };
+		2466E3502C4155C000D675B2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E34F2C4155C000D675B2 /* MainViewController.swift */; };
 		2466E3552C4155C100D675B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2466E3542C4155C100D675B2 /* Assets.xcassets */; };
 		2466E3582C4155C100D675B2 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 2466E3572C4155C100D675B2 /* Base */; };
 		2466E3602C41565200D675B2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 2466E35F2C41565200D675B2 /* .gitignore */; };
@@ -21,8 +20,7 @@
 		2466E3482C4155C000D675B2 /* MyWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2466E34B2C4155C000D675B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2466E34D2C4155C000D675B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2466E34F2C4155C000D675B2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2466E3522C4155C000D675B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2466E34F2C4155C000D675B2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2466E3542C4155C100D675B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2466E3572C4155C100D675B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2466E3592C4155C200D675B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,8 +62,7 @@
 				2466E3612C41566800D675B2 /* APIKey.swift */,
 				2466E34B2C4155C000D675B2 /* AppDelegate.swift */,
 				2466E34D2C4155C000D675B2 /* SceneDelegate.swift */,
-				2466E34F2C4155C000D675B2 /* ViewController.swift */,
-				2466E3512C4155C000D675B2 /* Main.storyboard */,
+				2466E34F2C4155C000D675B2 /* MainViewController.swift */,
 				2466E3542C4155C100D675B2 /* Assets.xcassets */,
 				2466E3562C4155C100D675B2 /* LaunchScreen.storyboard */,
 				2466E3592C4155C200D675B2 /* Info.plist */,
@@ -134,7 +131,6 @@
 				2466E3602C41565200D675B2 /* .gitignore in Resources */,
 				2466E3552C4155C100D675B2 /* Assets.xcassets in Resources */,
 				2466E3582C4155C100D675B2 /* Base in Resources */,
-				2466E3532C4155C000D675B2 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2466E3502C4155C000D675B2 /* ViewController.swift in Sources */,
+				2466E3502C4155C000D675B2 /* MainViewController.swift in Sources */,
 				2466E34C2C4155C000D675B2 /* AppDelegate.swift in Sources */,
 				2466E3622C41566900D675B2 /* APIKey.swift in Sources */,
 				2466E34E2C4155C000D675B2 /* SceneDelegate.swift in Sources */,
@@ -155,14 +151,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2466E3512C4155C000D675B2 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2466E3522C4155C000D675B2 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2466E3562C4155C100D675B2 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -305,7 +293,6 @@
 				INFOPLIST_FILE = MyWeather/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -338,7 +325,6 @@
 				INFOPLIST_FILE = MyWeather/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
