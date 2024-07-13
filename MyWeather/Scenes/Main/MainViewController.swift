@@ -30,7 +30,6 @@ final class MainViewController: BaseViewController {
         
         let sectionSpacing: CGFloat = 10
         let cellSpacing: CGFloat = 10
-        let cellCount: CGFloat = 1
         
         // 셀 사이즈
         let width: CGFloat = 50
