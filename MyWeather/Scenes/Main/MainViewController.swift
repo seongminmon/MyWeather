@@ -52,7 +52,7 @@ final class MainViewController: BaseViewController {
         $0.dataSource = self
         $0.register(WeatherTableViewCell.self, forCellReuseIdentifier: WeatherTableViewCell.identifier)
         $0.rowHeight = 60
-//        $0.isScrollEnabled = false
+        $0.isScrollEnabled = false
     }
     
     override func viewDidLoad() {
@@ -88,7 +88,7 @@ final class MainViewController: BaseViewController {
         tableView.snp.makeConstraints {
             $0.top.equalTo(collectionView.snp.bottom).offset(20)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(60 * 5)
+            $0.height.equalTo(60 * 50)
             $0.bottom.equalToSuperview().inset(20)
         }
     }
@@ -119,7 +119,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 500
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -129,7 +129,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         ) as? WeatherTableViewCell else {
             return UITableViewCell()
         }
-        cell.backgroundColor = .blue
+        cell.backgroundColor = .systemPink
         return cell
     }
 }
