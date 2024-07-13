@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Then
 
-final class MainViewController: UIViewController {
+final class MainViewController: BaseViewController {
 
     let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
@@ -21,7 +21,7 @@ final class MainViewController: UIViewController {
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout()).then {
         $0.delegate = self
         $0.dataSource = self
-        $0.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: WeatherCollectionViewCell.id)
+        $0.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: WeatherCollectionViewCell.identifier)
         $0.showsHorizontalScrollIndicator = false
     }
     
@@ -51,30 +51,27 @@ final class MainViewController: UIViewController {
     lazy var tableView = UITableView().then {
         $0.delegate = self
         $0.dataSource = self
+        $0.register(WeatherTableViewCell.self, forCellReuseIdentifier: WeatherTableViewCell.identifier)
         $0.rowHeight = 60
-        $0.register(WeatherTableViewCell.self, forCellReuseIdentifier: WeatherTableViewCell.id)
+//        $0.isScrollEnabled = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNavigationBar()
-        addSubviews()
-        configureLayout()
-        configureView()
     }
     
-    func configureNavigationBar() {
-        
+    override func configureNavigationBar() {
+        //
     }
     
-    func addSubviews() {
+    override func addSubviews() {
         contentView.addSubview(collectionView)
         contentView.addSubview(tableView)
         scrollView.addSubview(contentView)
         view.addSubview(scrollView)
     }
     
-    func configureLayout() {
+    override func configureLayout() {
         scrollView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -97,8 +94,8 @@ final class MainViewController: UIViewController {
         }
     }
     
-    func configureView() {
-        
+    override func configureView() {
+        //
     }
     
 }
@@ -110,7 +107,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: WeatherCollectionViewCell.id,
+            withReuseIdentifier: WeatherCollectionViewCell.identifier,
             for: indexPath
         ) as? WeatherCollectionViewCell else {
             return UICollectionViewCell()
@@ -128,7 +125,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: WeatherTableViewCell.id,
+            withIdentifier: WeatherTableViewCell.identifier,
             for: indexPath
         ) as? WeatherTableViewCell else {
             return UITableViewCell()

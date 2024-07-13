@@ -7,15 +7,17 @@
 
 import UIKit
 
-class WeatherCollectionViewCell: UICollectionViewCell {
+class WeatherCollectionViewCell: BaseCollectionViewCell {
     
-    static let id = "WeatherCollectionViewCell"
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override func addSubviews() {
+        
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func configureLayout() {
+        
+    }
+    
+    override func configureView() {
+        
     }
 }

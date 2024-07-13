@@ -19,6 +19,10 @@
 		2466E36B2C41609A00D675B2 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 2466E36A2C41609A00D675B2 /* Then */; };
 		2466E36D2C42933B00D675B2 /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E36C2C42933B00D675B2 /* WeatherCollectionViewCell.swift */; };
 		2466E36F2C42934800D675B2 /* WeatherTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E36E2C42934800D675B2 /* WeatherTableViewCell.swift */; };
+		2466E3712C4297DB00D675B2 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3702C4297DB00D675B2 /* BaseViewController.swift */; };
+		2466E3742C42985700D675B2 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3732C42985700D675B2 /* BaseTableViewCell.swift */; };
+		2466E3762C42988700D675B2 /* ReuseIdentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3752C42988700D675B2 /* ReuseIdentifierProtocol.swift */; };
+		2466E3782C4298A200D675B2 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3772C4298A200D675B2 /* BaseCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		2466E3612C41566800D675B2 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		2466E36C2C42933B00D675B2 /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 		2466E36E2C42934800D675B2 /* WeatherTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewCell.swift; sourceTree = "<group>"; };
+		2466E3702C4297DB00D675B2 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		2466E3732C42985700D675B2 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		2466E3752C42988700D675B2 /* ReuseIdentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifierProtocol.swift; sourceTree = "<group>"; };
+		2466E3772C4298A200D675B2 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,8 @@
 				2466E3612C41566800D675B2 /* APIKey.swift */,
 				2466E34B2C4155C000D675B2 /* AppDelegate.swift */,
 				2466E34D2C4155C000D675B2 /* SceneDelegate.swift */,
+				2466E3752C42988700D675B2 /* ReuseIdentifierProtocol.swift */,
+				2466E3722C42984B00D675B2 /* Base */,
 				2466E34F2C4155C000D675B2 /* MainViewController.swift */,
 				2466E36C2C42933B00D675B2 /* WeatherCollectionViewCell.swift */,
 				2466E36E2C42934800D675B2 /* WeatherTableViewCell.swift */,
@@ -80,6 +90,16 @@
 				2466E3592C4155C200D675B2 /* Info.plist */,
 			);
 			path = MyWeather;
+			sourceTree = "<group>";
+		};
+		2466E3722C42984B00D675B2 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				2466E3702C4297DB00D675B2 /* BaseViewController.swift */,
+				2466E3772C4298A200D675B2 /* BaseCollectionViewCell.swift */,
+				2466E3732C42985700D675B2 /* BaseTableViewCell.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,12 +183,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2466E3742C42985700D675B2 /* BaseTableViewCell.swift in Sources */,
 				2466E36F2C42934800D675B2 /* WeatherTableViewCell.swift in Sources */,
 				2466E36D2C42933B00D675B2 /* WeatherCollectionViewCell.swift in Sources */,
 				2466E3502C4155C000D675B2 /* MainViewController.swift in Sources */,
 				2466E34C2C4155C000D675B2 /* AppDelegate.swift in Sources */,
+				2466E3782C4298A200D675B2 /* BaseCollectionViewCell.swift in Sources */,
 				2466E3622C41566900D675B2 /* APIKey.swift in Sources */,
+				2466E3712C4297DB00D675B2 /* BaseViewController.swift in Sources */,
 				2466E34E2C4155C000D675B2 /* SceneDelegate.swift in Sources */,
+				2466E3762C42988700D675B2 /* ReuseIdentifierProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
