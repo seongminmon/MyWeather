@@ -41,7 +41,6 @@ final class ContainerView: BaseView {
         layer.opacity = 0.8
         clipsToBounds = true
         layer.cornerRadius = 10
-        
         separator.backgroundColor = .white
     }
     

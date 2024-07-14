@@ -18,6 +18,8 @@ final class MainViewController: BaseViewController {
     
     let contentView = UIView()
     
+    let hourContainerView = ContainerView()
+    
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout()).then {
         $0.delegate = self
         $0.dataSource = self
@@ -64,7 +66,8 @@ final class MainViewController: BaseViewController {
     }
     
     override func addSubviews() {
-        contentView.addSubview(collectionView)
+        hourContainerView.addSubview(collectionView)
+        contentView.addSubview(hourContainerView)
         contentView.addSubview(tableView)
         scrollView.addSubview(contentView)
         view.addSubview(scrollView)
@@ -79,10 +82,16 @@ final class MainViewController: BaseViewController {
             $0.width.verticalEdges.equalToSuperview()
         }
         
-        collectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
+        hourContainerView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(30)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(200)
+            $0.height.equalTo(230)
+        }
+        
+        collectionView.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(30)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview()
         }
         
         tableView.snp.makeConstraints {
@@ -94,7 +103,7 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureView() {
-        //
+        hourContainerView.headerLabel.text = "3시간 간격의 일기예보"
     }
     
 }
