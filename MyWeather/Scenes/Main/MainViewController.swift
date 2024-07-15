@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MapKit
 import SnapKit
 import Then
 
@@ -19,6 +20,20 @@ final class MainViewController: BaseViewController {
     let contentView = UIView()
     
     let weatherView = UIView()
+    
+    let hourContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "calendar", text: " 3시간 간격의 일기예보")
+    }
+    
+    let dayContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "calendar", text: "  5일 간의 일기예보")
+    }
+    
+    let mapContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "thermometer.medium", text: " 위치")
+    }
+    
+    let mapView = MKMapView()
     
     let cityNameLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 30)
@@ -38,14 +53,6 @@ final class MainViewController: BaseViewController {
     let temparatureDescriptionLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 24)
         $0.textAlignment = .center
-    }
-    
-    let hourContainerView = ContainerView().then {
-        $0.configureLabel(imageName: "calendar", text: " 3시간 간격의 일기예보")
-    }
-    
-    let dayContainerView = ContainerView().then {
-        $0.configureLabel(imageName: "calendar", text: "  5일 간의 일기예보")
     }
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout()).then {
@@ -83,7 +90,7 @@ final class MainViewController: BaseViewController {
         $0.dataSource = self
         $0.register(WeatherTableViewCell.self, forCellReuseIdentifier: WeatherTableViewCell.identifier)
         $0.rowHeight = 60
-//        $0.isScrollEnabled = false
+        $0.isScrollEnabled = false
     }
     
     override func viewDidLoad() {
@@ -110,18 +117,20 @@ final class MainViewController: BaseViewController {
     }
     
     override func addSubviews() {
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(weatherView)
+        contentView.addSubview(hourContainerView)
+        contentView.addSubview(dayContainerView)
+        contentView.addSubview(mapContainerView)
+        
         weatherView.addSubview(cityNameLabel)
         weatherView.addSubview(temparatureLabel)
         weatherView.addSubview(weatherDescriptionLabel)
         weatherView.addSubview(temparatureDescriptionLabel)
         hourContainerView.addSubview(collectionView)
         dayContainerView.addSubview(tableView)
-        
-        contentView.addSubview(weatherView)
-        contentView.addSubview(hourContainerView)
-        contentView.addSubview(dayContainerView)
-        scrollView.addSubview(contentView)
-        view.addSubview(scrollView)
+        mapContainerView.addSubview(mapView)
     }
     
     override func configureLayout() {
@@ -170,6 +179,14 @@ final class MainViewController: BaseViewController {
             $0.height.equalTo(30 + 300)
         }
         
+        mapContainerView.snp.makeConstraints {
+            $0.top.equalTo(dayContainerView.snp.bottom).offset(16)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(30 + 200)
+            // TODO: - 아래에 컨텐츠 더 추가되면 이동
+            $0.bottom.equalToSuperview().inset(20)
+        }
+        
         collectionView.snp.makeConstraints {
             $0.top.equalTo(hourContainerView.separator.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview()
@@ -181,11 +198,17 @@ final class MainViewController: BaseViewController {
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
+        
+        mapView.snp.makeConstraints {
+            $0.top.equalTo(mapContainerView.separator.snp.bottom).offset(4)
+            $0.horizontalEdges.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
     }
     
     override func configureView() {
         cityNameLabel.text = "Jeju City"
-        temparatureLabel.text = "5.9°"
+        temparatureLabel.text = " 5.9°"
         weatherDescriptionLabel.text = "Broken Clouds"
         temparatureDescriptionLabel.text = "최고: 7.0° | 최저: -4.2°"
     }
