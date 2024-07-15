@@ -246,12 +246,12 @@ final class MainViewController: BaseViewController {
         windSpeedContainerView.snp.makeConstraints {
             $0.top.equalTo(mapContainerView.snp.bottom).offset(16)
             $0.leading.equalToSuperview().inset(16)
-            $0.width.equalTo(view.frame.width / 2 - 20)
+            $0.width.equalTo(view.frame.width / 2 - 24)
             $0.height.equalTo(windSpeedContainerView.snp.width)
         }
         
         windSpeedLabel.snp.makeConstraints {
-            $0.top.equalTo(windSpeedContainerView.separator.snp.bottom)
+            $0.top.equalTo(windSpeedContainerView.separator.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview().inset(8)
         }
         
@@ -262,7 +262,7 @@ final class MainViewController: BaseViewController {
         }
         
         cloudLabel.snp.makeConstraints {
-            $0.top.equalTo(cloudContainerView.separator.snp.bottom)
+            $0.top.equalTo(cloudContainerView.separator.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview().inset(8)
         }
         
@@ -273,7 +273,7 @@ final class MainViewController: BaseViewController {
         }
         
         barometerLabel.snp.makeConstraints {
-            $0.top.equalTo(barometerContainerView.separator.snp.bottom)
+            $0.top.equalTo(barometerContainerView.separator.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview().inset(8)
         }
         
@@ -286,7 +286,7 @@ final class MainViewController: BaseViewController {
         }
         
         humidityLabel.snp.makeConstraints {
-            $0.top.equalTo(humidityContainerView.separator.snp.bottom)
+            $0.top.equalTo(humidityContainerView.separator.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview().inset(8)
         }
     }
