@@ -11,6 +11,8 @@ import Then
 
 final class ContainerView: BaseView {
     
+    let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+    
     let headerLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 16)
     }
@@ -20,11 +22,16 @@ final class ContainerView: BaseView {
     }
     
     override func addSubviews() {
+        addSubview(visualEffectView)
         addSubview(headerLabel)
         addSubview(separator)
     }
     
     override func configureLayout() {
+        visualEffectView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
         headerLabel.snp.makeConstraints {
             $0.top.equalToSuperview().inset(8)
             $0.horizontalEdges.equalToSuperview().inset(16)
@@ -39,7 +46,6 @@ final class ContainerView: BaseView {
     }
     
     override func configureView() {
-        backgroundColor = .darkGray.withAlphaComponent(0.5)
         clipsToBounds = true
         layer.cornerRadius = 10
     }

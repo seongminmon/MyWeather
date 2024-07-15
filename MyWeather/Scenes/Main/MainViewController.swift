@@ -19,6 +19,10 @@ final class MainViewController: BaseViewController {
     
     let contentView = UIView()
     
+    let backgroundImageView = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+    }
+    
     let weatherView = UIView()
     
     let cityNameLabel = UILabel().then {
@@ -138,6 +142,18 @@ final class MainViewController: BaseViewController {
         navigationController?.isToolbarHidden = false
         navigationController?.toolbar.tintColor = .white
         toolbarItems = [mapButton, flexibleSpace, cityButton]
+        
+        // 네비게이션바 투명하게 만들기
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        
+        // 툴바 스크롤엣지에서도 투명하지 않게 만들기
+        let toolbarAppearance = UIToolbarAppearance()
+        toolbarAppearance.configureWithDefaultBackground()
+        navigationController?.toolbar.standardAppearance = toolbarAppearance
+        navigationController?.toolbar.scrollEdgeAppearance = toolbarAppearance
     }
     
     @objc func mapButtonTapped() {
@@ -151,6 +167,7 @@ final class MainViewController: BaseViewController {
     override func addSubviews() {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(backgroundImageView)
         contentView.addSubview(weatherView)
         contentView.addSubview(hourContainerView)
         contentView.addSubview(dayContainerView)
@@ -175,11 +192,15 @@ final class MainViewController: BaseViewController {
     
     override func configureLayout() {
         scrollView.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.edges.equalToSuperview()
         }
         
         contentView.snp.makeConstraints {
             $0.width.verticalEdges.equalToSuperview()
+        }
+        
+        backgroundImageView.snp.makeConstraints {
+            $0.edges.equalTo(view)
         }
         
         weatherView.snp.makeConstraints {
@@ -292,6 +313,8 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureView() {
+        backgroundImageView.image = UIImage(named: "cloud")
+        
         cityNameLabel.text = "Jeju City"
         temparatureLabel.text = " 5.9°"
         weatherDescriptionLabel.text = "Broken Clouds"
