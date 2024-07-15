@@ -40,7 +40,7 @@ final class ContainerView: BaseView {
     
     override func configureView() {
         backgroundColor = .darkGray
-//        layer.opacity = 0.8
+        layer.opacity = 0.8
         clipsToBounds = true
         layer.cornerRadius = 10
     }

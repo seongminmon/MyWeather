@@ -18,7 +18,35 @@ final class MainViewController: BaseViewController {
     
     let contentView = UIView()
     
-    let hourContainerView = ContainerView()
+    let weatherView = UIView()
+    
+    let cityNameLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 30)
+        $0.textAlignment = .center
+    }
+    
+    let temparatureLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 80)
+        $0.textAlignment = .center
+    }
+    
+    let weatherDescriptionLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 24)
+        $0.textAlignment = .center
+    }
+    
+    let temparatureDescriptionLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 24)
+        $0.textAlignment = .center
+    }
+    
+    let hourContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "calendar", text: " 3시간 간격의 일기예보")
+    }
+    
+    let dayContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "calendar", text: "  5일 간의 일기예보")
+    }
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout()).then {
         $0.delegate = self
@@ -55,7 +83,7 @@ final class MainViewController: BaseViewController {
         $0.dataSource = self
         $0.register(WeatherTableViewCell.self, forCellReuseIdentifier: WeatherTableViewCell.identifier)
         $0.rowHeight = 60
-        $0.isScrollEnabled = false
+//        $0.isScrollEnabled = false
     }
     
     override func viewDidLoad() {
@@ -74,17 +102,24 @@ final class MainViewController: BaseViewController {
     }
     
     @objc func mapButtonTapped() {
-        
+        print(#function)
     }
     
     @objc func cityButtonTapped() {
-        
+        print(#function)
     }
     
     override func addSubviews() {
+        weatherView.addSubview(cityNameLabel)
+        weatherView.addSubview(temparatureLabel)
+        weatherView.addSubview(weatherDescriptionLabel)
+        weatherView.addSubview(temparatureDescriptionLabel)
         hourContainerView.addSubview(collectionView)
+        dayContainerView.addSubview(tableView)
+        
+        contentView.addSubview(weatherView)
         contentView.addSubview(hourContainerView)
-        contentView.addSubview(tableView)
+        contentView.addSubview(dayContainerView)
         scrollView.addSubview(contentView)
         view.addSubview(scrollView)
     }
@@ -98,10 +133,41 @@ final class MainViewController: BaseViewController {
             $0.width.verticalEdges.equalToSuperview()
         }
         
-        hourContainerView.snp.makeConstraints {
+        weatherView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(30)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(200)
+        }
+        
+        cityNameLabel.snp.makeConstraints {
+            $0.top.horizontalEdges.equalToSuperview()
+        }
+        
+        temparatureLabel.snp.makeConstraints {
+            $0.top.equalTo(cityNameLabel.snp.bottom)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(230)
+        }
+        
+        weatherDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(temparatureLabel.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
+        }
+        
+        temparatureDescriptionLabel.snp.makeConstraints {
+            $0.top.equalTo(weatherDescriptionLabel.snp.bottom)
+            $0.horizontalEdges.equalToSuperview()
+        }
+        
+        hourContainerView.snp.makeConstraints {
+            $0.top.equalTo(weatherView.snp.bottom).offset(30)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(30 + 200)
+        }
+        
+        dayContainerView.snp.makeConstraints {
+            $0.top.equalTo(hourContainerView.snp.bottom).offset(16)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(30 + 300)
         }
         
         collectionView.snp.makeConstraints {
@@ -111,15 +177,17 @@ final class MainViewController: BaseViewController {
         }
         
         tableView.snp.makeConstraints {
-            $0.top.equalTo(collectionView.snp.bottom).offset(20)
+            $0.top.equalTo(dayContainerView.separator.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(60 * 50)
-            $0.bottom.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview()
         }
     }
     
     override func configureView() {
-        hourContainerView.configureLabel(imageName: "calendar", text: " 3시간 간격의 일기예보")
+        cityNameLabel.text = "Jeju City"
+        temparatureLabel.text = "5.9°"
+        weatherDescriptionLabel.text = "Broken Clouds"
+        temparatureDescriptionLabel.text = "최고: 7.0° | 최저: -4.2°"
     }
     
 }
@@ -144,7 +212,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 500
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -154,7 +222,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         ) as? WeatherTableViewCell else {
             return UITableViewCell()
         }
-        cell.backgroundColor = .systemPink
+        cell.backgroundColor = .purple
         return cell
     }
 }
