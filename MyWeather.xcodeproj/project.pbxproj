@@ -30,6 +30,7 @@
 		2466E38D2C45227C00D675B2 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E38C2C45227C00D675B2 /* WeatherResponse.swift */; };
 		2466E3902C45443C00D675B2 /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E38F2C45443C00D675B2 /* ForecastResponse.swift */; };
 		2466E3932C45498D00D675B2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3922C45498D00D675B2 /* MainViewModel.swift */; };
+		2466E3952C4549FC00D675B2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3942C4549FC00D675B2 /* Observable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		2466E38C2C45227C00D675B2 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		2466E38F2C45443C00D675B2 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
 		2466E3922C45498D00D675B2 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		2466E3942C4549FC00D675B2 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,9 +96,10 @@
 				2466E3612C41566800D675B2 /* APIKey.swift */,
 				2466E34B2C4155C000D675B2 /* AppDelegate.swift */,
 				2466E34D2C4155C000D675B2 /* SceneDelegate.swift */,
+				2466E3942C4549FC00D675B2 /* Observable.swift */,
+				2466E3752C42988700D675B2 /* ReuseIdentifierProtocol.swift */,
 				2466E38E2C45443200D675B2 /* Model */,
 				2466E3912C45444500D675B2 /* Network */,
-				2466E3752C42988700D675B2 /* ReuseIdentifierProtocol.swift */,
 				2466E37B2C429A7600D675B2 /* Custom */,
 				2466E37E2C429AC500D675B2 /* Scenes */,
 				2466E3542C4155C100D675B2 /* Assets.xcassets */,
@@ -248,6 +251,7 @@
 				2466E38D2C45227C00D675B2 /* WeatherResponse.swift in Sources */,
 				2466E3742C42985700D675B2 /* BaseTableViewCell.swift in Sources */,
 				2466E36F2C42934800D675B2 /* WeatherTableViewCell.swift in Sources */,
+				2466E3952C4549FC00D675B2 /* Observable.swift in Sources */,
 				2466E36D2C42933B00D675B2 /* WeatherCollectionViewCell.swift in Sources */,
 				2466E3892C451BF500D675B2 /* NetworkManager.swift in Sources */,
 				2466E3502C4155C000D675B2 /* MainViewController.swift in Sources */,

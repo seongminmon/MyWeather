@@ -10,7 +10,7 @@ import Foundation
 final class MainViewModel {
     
     // Input
-    
+//    var inputViewDidLoadTrigger
     
     // Output
     
