@@ -11,16 +11,12 @@ struct WeatherResponse: Decodable {
     let coord: Coord
     let weather: [Weather]
     let main: Main
-    let visibility: Int
     let wind: Wind
     let clouds: Clouds
     let sys: Sys
-    let timezone: Int
     let id: Int
     let name: String
     let cod: Int
-//    let base: String
-//    let dt: Int
 }
 
 struct Coord: Decodable {
@@ -45,6 +41,18 @@ struct Main: Decodable {
         case pressure
         case humidity
     }
+    
+    var tempCelsius: String {
+        return String(format: "%.2f", temp - 273.15)
+    }
+    
+    var tempMinCelsius: String {
+        return String(format: "%.2f", tempMin - 273.15)
+    }
+    
+    var tempMaxCelsius: String {
+        return String(format: "%.2f", tempMax - 273.15)
+    }
 }
 
 struct Clouds: Decodable {
@@ -55,7 +63,7 @@ struct Sys: Decodable {
     let country: String
 }
 
-//struct Wind: Decodable {
-//    let speed: Double
-//    let deg: Int
-//}
+struct Wind: Decodable {
+    let speed: Double
+    let deg: Int
+}

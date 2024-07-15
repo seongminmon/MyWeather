@@ -114,25 +114,14 @@ final class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // 네트워크 통신 (현재 날씨, 도시 ID)
-//        NetworkManager.shared.request(api: .currentCityID(id: "1846266"), model: WeatherResponse.self) { result in
-//            switch result {
-//            case .success(let data):
-//                dump(data)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-        
-        // 네트워크 통신 (예보, 도시 ID)
-        NetworkManager.shared.request(api: .forecastCityID(id: "1846266"), model: ForecastResponse.self) { result in
-            switch result {
-            case .success(let data):
-                dump(data)
-            case .failure(let error):
-                print(error)
-            }
+        viewModel.inputViewDidLoadTrigger.value = ()
+        bindData()
+    }
+    
+    func bindData() {
+        viewModel.outputWeatherResponse.bind { [weak self] _ in
+            guard let self else { return }
+            configureWeatherView()
         }
     }
     
@@ -246,7 +235,7 @@ final class MainViewController: BaseViewController {
         dayContainerView.snp.makeConstraints {
             $0.top.equalTo(hourContainerView.snp.bottom).offset(16)
             $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.height.equalTo(30 + 300)
+            $0.height.equalTo(43 + 300)
         }
         
         tableView.snp.makeConstraints {
@@ -316,16 +305,19 @@ final class MainViewController: BaseViewController {
     
     override func configureView() {
         backgroundImageView.image = UIImage(named: "cloud")
+    }
+    
+    func configureWeatherView() {
+        guard let data = viewModel.outputWeatherResponse.value else { return }
+        cityNameLabel.text = data.name
+        temparatureLabel.text = " \(data.main.tempCelsius)°"
+        weatherDescriptionLabel.text = data.weather.first!.description
+        temparatureDescriptionLabel.text = "최고: \(data.main.tempMaxCelsius)° | 최저: \(data.main.tempMinCelsius)°"
         
-        cityNameLabel.text = "Jeju City"
-        temparatureLabel.text = " 5.9°"
-        weatherDescriptionLabel.text = "Broken Clouds"
-        temparatureDescriptionLabel.text = "최고: 7.0° | 최저: -4.2°"
-        
-        windSpeedLabel.text = "1.35m/s"
-        cloudLabel.text = "50%"
-        barometerLabel.text = "1,020hpa"
-        humidityLabel.text = "73%"
+        windSpeedLabel.text = "\(data.wind.speed)m/s"
+        cloudLabel.text = "\(data.clouds.all)%"
+        barometerLabel.text = "\(data.main.pressure)hpa"
+        humidityLabel.text = "\(data.main.humidity)%"
     }
     
 }

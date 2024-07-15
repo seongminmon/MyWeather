@@ -36,8 +36,8 @@ struct City: Decodable {
 //    let population, timezone, sunrise, sunset: Int
 }
 
-struct Wind: Decodable {
-    let speed: Double
-    let deg: Int
-    let gust: Double
-}
+//struct Wind: Decodable {
+//    let speed: Double
+//    let deg: Int
+//    let gust: Double
+//}
