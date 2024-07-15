@@ -21,20 +21,6 @@ final class MainViewController: BaseViewController {
     
     let weatherView = UIView()
     
-    let hourContainerView = ContainerView().then {
-        $0.configureLabel(imageName: "calendar", text: " 3시간 간격의 일기예보")
-    }
-    
-    let dayContainerView = ContainerView().then {
-        $0.configureLabel(imageName: "calendar", text: "  5일 간의 일기예보")
-    }
-    
-    let mapContainerView = ContainerView().then {
-        $0.configureLabel(imageName: "thermometer.medium", text: " 위치")
-    }
-    
-    let mapView = MKMapView()
-    
     let cityNameLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 30)
         $0.textAlignment = .center
@@ -53,6 +39,10 @@ final class MainViewController: BaseViewController {
     let temparatureDescriptionLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 24)
         $0.textAlignment = .center
+    }
+    
+    let hourContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "calendar", text: " 3시간 간격의 일기예보")
     }
     
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout()).then {
@@ -85,12 +75,54 @@ final class MainViewController: BaseViewController {
         return layout
     }
     
+    let dayContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "calendar", text: "  5일 간의 일기예보")
+    }
+    
     lazy var tableView = UITableView().then {
         $0.delegate = self
         $0.dataSource = self
         $0.register(WeatherTableViewCell.self, forCellReuseIdentifier: WeatherTableViewCell.identifier)
         $0.rowHeight = 60
         $0.isScrollEnabled = false
+    }
+    
+    let mapContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "thermometer.medium", text: " 위치")
+    }
+    
+    let mapView = MKMapView()
+    
+    let windSpeedContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "wind", text: " 바람 속도")
+    }
+    
+    let windSpeedLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 24)
+    }
+    
+    let cloudContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "drop.fill", text: " 구름")
+    }
+    
+    let cloudLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 24)
+    }
+    
+    let barometerContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "thermometer.medium", text: " 기압")
+    }
+    
+    let barometerLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 24)
+    }
+    
+    let humidityContainerView = ContainerView().then {
+        $0.configureLabel(imageName: "humidity", text: " 습도")
+    }
+    
+    let humidityLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 24)
     }
     
     override func viewDidLoad() {
@@ -123,6 +155,10 @@ final class MainViewController: BaseViewController {
         contentView.addSubview(hourContainerView)
         contentView.addSubview(dayContainerView)
         contentView.addSubview(mapContainerView)
+        contentView.addSubview(windSpeedContainerView)
+        contentView.addSubview(cloudContainerView)
+        contentView.addSubview(barometerContainerView)
+        contentView.addSubview(humidityContainerView)
         
         weatherView.addSubview(cityNameLabel)
         weatherView.addSubview(temparatureLabel)
@@ -131,6 +167,10 @@ final class MainViewController: BaseViewController {
         hourContainerView.addSubview(collectionView)
         dayContainerView.addSubview(tableView)
         mapContainerView.addSubview(mapView)
+        windSpeedContainerView.addSubview(windSpeedLabel)
+        cloudContainerView.addSubview(cloudLabel)
+        barometerContainerView.addSubview(barometerLabel)
+        humidityContainerView.addSubview(humidityLabel)
     }
     
     override func configureLayout() {
@@ -173,24 +213,16 @@ final class MainViewController: BaseViewController {
             $0.height.equalTo(30 + 200)
         }
         
-        dayContainerView.snp.makeConstraints {
-            $0.top.equalTo(hourContainerView.snp.bottom).offset(16)
-            $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.height.equalTo(30 + 300)
-        }
-        
-        mapContainerView.snp.makeConstraints {
-            $0.top.equalTo(dayContainerView.snp.bottom).offset(16)
-            $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.height.equalTo(30 + 200)
-            // TODO: - 아래에 컨텐츠 더 추가되면 이동
-            $0.bottom.equalToSuperview().inset(20)
-        }
-        
         collectionView.snp.makeConstraints {
             $0.top.equalTo(hourContainerView.separator.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview()
+        }
+        
+        dayContainerView.snp.makeConstraints {
+            $0.top.equalTo(hourContainerView.snp.bottom).offset(16)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(30 + 300)
         }
         
         tableView.snp.makeConstraints {
@@ -199,10 +231,63 @@ final class MainViewController: BaseViewController {
             $0.bottom.equalToSuperview()
         }
         
+        mapContainerView.snp.makeConstraints {
+            $0.top.equalTo(dayContainerView.snp.bottom).offset(16)
+            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.height.equalTo(30 + 200)
+        }
+        
         mapView.snp.makeConstraints {
             $0.top.equalTo(mapContainerView.separator.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview()
+        }
+        
+        windSpeedContainerView.snp.makeConstraints {
+            $0.top.equalTo(mapContainerView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(16)
+            $0.width.equalTo(view.frame.width / 2 - 20)
+            $0.height.equalTo(windSpeedContainerView.snp.width)
+        }
+        
+        windSpeedLabel.snp.makeConstraints {
+            $0.top.equalTo(windSpeedContainerView.separator.snp.bottom)
+            $0.horizontalEdges.equalToSuperview().inset(8)
+        }
+        
+        cloudContainerView.snp.makeConstraints {
+            $0.top.equalTo(mapContainerView.snp.bottom).offset(16)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.size.equalTo(windSpeedContainerView)
+        }
+        
+        cloudLabel.snp.makeConstraints {
+            $0.top.equalTo(cloudContainerView.separator.snp.bottom)
+            $0.horizontalEdges.equalToSuperview().inset(8)
+        }
+        
+        barometerContainerView.snp.makeConstraints {
+            $0.top.equalTo(windSpeedContainerView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().inset(16)
+            $0.size.equalTo(windSpeedContainerView)
+        }
+        
+        barometerLabel.snp.makeConstraints {
+            $0.top.equalTo(barometerContainerView.separator.snp.bottom)
+            $0.horizontalEdges.equalToSuperview().inset(8)
+        }
+        
+        humidityContainerView.snp.makeConstraints {
+            $0.top.equalTo(windSpeedContainerView.snp.bottom).offset(16)
+            $0.trailing.equalToSuperview().inset(16)
+            $0.size.equalTo(windSpeedContainerView)
+            // TODO: - 아래에 컨텐츠 더 추가되면 이동
+            $0.bottom.equalToSuperview().inset(20)
+        }
+        
+        humidityLabel.snp.makeConstraints {
+            $0.top.equalTo(humidityContainerView.separator.snp.bottom)
+            $0.horizontalEdges.equalToSuperview().inset(8)
         }
     }
     
@@ -211,6 +296,11 @@ final class MainViewController: BaseViewController {
         temparatureLabel.text = " 5.9°"
         weatherDescriptionLabel.text = "Broken Clouds"
         temparatureDescriptionLabel.text = "최고: 7.0° | 최저: -4.2°"
+        
+        windSpeedLabel.text = "1.35m/s"
+        cloudLabel.text = "50%"
+        barometerLabel.text = "1,020hpa"
+        humidityLabel.text = "73%"
     }
     
 }

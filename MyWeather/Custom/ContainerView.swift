@@ -33,14 +33,13 @@ final class ContainerView: BaseView {
         
         separator.snp.makeConstraints {
             $0.top.equalTo(headerLabel.snp.bottom)
-            $0.horizontalEdges.equalToSuperview().inset(16)
+            $0.horizontalEdges.equalToSuperview().inset(8)
             $0.height.equalTo(1)
         }
     }
     
     override func configureView() {
-        backgroundColor = .darkGray
-        layer.opacity = 0.8
+        backgroundColor = .darkGray.withAlphaComponent(0.5)
         clipsToBounds = true
         layer.cornerRadius = 10
     }
@@ -48,9 +47,9 @@ final class ContainerView: BaseView {
     func configureLabel(imageName: String, text: String) {
         let attributeString = NSMutableAttributedString(string: "")
         let imageAttachment = NSTextAttachment()
-        imageAttachment.image = UIImage(systemName: "calendar")?.withTintColor(.white)
+        imageAttachment.image = UIImage(systemName: imageName)?.withTintColor(.white)
         attributeString.append(NSAttributedString(attachment: imageAttachment))
-        attributeString.append(NSAttributedString(string: " 3시간 간격의 일기예보"))
+        attributeString.append(NSAttributedString(string: text))
         headerLabel.attributedText = attributeString
     }
     
