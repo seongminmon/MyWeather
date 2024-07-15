@@ -29,6 +29,7 @@
 		2466E38B2C451C4500D675B2 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E38A2C451C4500D675B2 /* NetworkRequest.swift */; };
 		2466E38D2C45227C00D675B2 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E38C2C45227C00D675B2 /* WeatherResponse.swift */; };
 		2466E3902C45443C00D675B2 /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E38F2C45443C00D675B2 /* ForecastResponse.swift */; };
+		2466E3932C45498D00D675B2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3922C45498D00D675B2 /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		2466E38A2C451C4500D675B2 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		2466E38C2C45227C00D675B2 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		2466E38F2C45443C00D675B2 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
+		2466E3922C45498D00D675B2 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				2466E34F2C4155C000D675B2 /* MainViewController.swift */,
+				2466E3922C45498D00D675B2 /* MainViewModel.swift */,
 				2466E36C2C42933B00D675B2 /* WeatherCollectionViewCell.swift */,
 				2466E36E2C42934800D675B2 /* WeatherTableViewCell.swift */,
 			);
@@ -249,6 +252,7 @@
 				2466E3892C451BF500D675B2 /* NetworkManager.swift in Sources */,
 				2466E3502C4155C000D675B2 /* MainViewController.swift in Sources */,
 				2466E3902C45443C00D675B2 /* ForecastResponse.swift in Sources */,
+				2466E3932C45498D00D675B2 /* MainViewModel.swift in Sources */,
 				2466E34C2C4155C000D675B2 /* AppDelegate.swift in Sources */,
 				2466E3782C4298A200D675B2 /* BaseCollectionViewCell.swift in Sources */,
 				2466E3622C41566900D675B2 /* APIKey.swift in Sources */,

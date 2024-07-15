@@ -110,6 +110,8 @@ final class MainViewController: BaseViewController {
         $0.font = .systemFont(ofSize: 24)
     }
     
+    let viewModel = MainViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
