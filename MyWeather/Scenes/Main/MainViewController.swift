@@ -49,34 +49,15 @@ final class MainViewController: BaseViewController {
         $0.configureLabel(imageName: "calendar", text: " 3시간 간격의 일기예보")
     }
     
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout()).then {
+    lazy var collectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: BaseViewController.collectionViewLayout()
+    ).then {
         $0.delegate = self
         $0.dataSource = self
         $0.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: WeatherCollectionViewCell.identifier)
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .clear
-    }
-    
-    func collectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        
-        let sectionSpacing: CGFloat = 10
-        let cellSpacing: CGFloat = 10
-        
-        // 셀 사이즈
-        let width: CGFloat = 50
-        let height: CGFloat = width * 3
-        layout.itemSize = CGSize(width: width, height: height)
-        // 스크롤 방향
-        layout.scrollDirection = .horizontal
-        // 셀 사이 거리 (가로)
-        layout.minimumInteritemSpacing = cellSpacing
-        // 셀 사이 거리 (세로)
-        layout.minimumLineSpacing = cellSpacing
-        // 섹션 인셋
-        layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
-        
-        return layout
     }
     
     let dayContainerView = ContainerView().then {
@@ -131,6 +112,26 @@ final class MainViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 네트워크 통신 (현재 날씨, 도시 ID)
+//        NetworkManager.shared.request(api: .currentCityID(id: "1846266"), model: WeatherResponse.self) { result in
+//            switch result {
+//            case .success(let data):
+//                dump(data)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+        
+        // 네트워크 통신 (예보, 도시 ID)
+        NetworkManager.shared.request(api: .forecastCityID(id: "1846266"), model: ForecastResponse.self) { result in
+            switch result {
+            case .success(let data):
+                dump(data)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     override func configureNavigationBar() {
@@ -302,7 +303,6 @@ final class MainViewController: BaseViewController {
             $0.top.equalTo(windSpeedContainerView.snp.bottom).offset(16)
             $0.trailing.equalToSuperview().inset(16)
             $0.size.equalTo(windSpeedContainerView)
-            // TODO: - 아래에 컨텐츠 더 추가되면 이동
             $0.bottom.equalToSuperview().inset(20)
         }
         
