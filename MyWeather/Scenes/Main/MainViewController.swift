@@ -25,6 +25,7 @@ final class MainViewController: BaseViewController {
         $0.dataSource = self
         $0.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: WeatherCollectionViewCell.identifier)
         $0.showsHorizontalScrollIndicator = false
+        $0.backgroundColor = .clear
     }
     
     func collectionViewLayout() -> UICollectionViewLayout {
@@ -62,7 +63,22 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureNavigationBar() {
-        //
+        // 툴바 설정
+        let mapButton = UIBarButtonItem(image: UIImage(systemName: "map"), style: .plain, target: self, action: #selector(mapButtonTapped))
+        let cityButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(cityButtonTapped))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+
+        navigationController?.isToolbarHidden = false
+        navigationController?.toolbar.tintColor = .white
+        toolbarItems = [mapButton, flexibleSpace, cityButton]
+    }
+    
+    @objc func mapButtonTapped() {
+        
+    }
+    
+    @objc func cityButtonTapped() {
+        
     }
     
     override func addSubviews() {
@@ -89,7 +105,7 @@ final class MainViewController: BaseViewController {
         }
         
         collectionView.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(30)
+            $0.top.equalTo(hourContainerView.separator.snp.bottom).offset(4)
             $0.horizontalEdges.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
@@ -103,7 +119,7 @@ final class MainViewController: BaseViewController {
     }
     
     override func configureView() {
-        hourContainerView.headerLabel.text = "3시간 간격의 일기예보"
+        hourContainerView.configureLabel(imageName: "calendar", text: " 3시간 간격의 일기예보")
     }
     
 }

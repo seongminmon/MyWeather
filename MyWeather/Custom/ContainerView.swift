@@ -12,11 +12,12 @@ import Then
 final class ContainerView: BaseView {
     
     let headerLabel = UILabel().then {
-        $0.font = .systemFont(ofSize: 15)
-        $0.textColor = .white
+        $0.font = .systemFont(ofSize: 16)
     }
     
-    let separator = UIView()
+    let separator = UIView().then {
+        $0.backgroundColor = .white
+    }
     
     override func addSubviews() {
         addSubview(headerLabel)
@@ -38,10 +39,19 @@ final class ContainerView: BaseView {
     }
     
     override func configureView() {
-        layer.opacity = 0.8
+        backgroundColor = .darkGray
+//        layer.opacity = 0.8
         clipsToBounds = true
         layer.cornerRadius = 10
-        separator.backgroundColor = .white
+    }
+    
+    func configureLabel(imageName: String, text: String) {
+        let attributeString = NSMutableAttributedString(string: "")
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(systemName: "calendar")?.withTintColor(.white)
+        attributeString.append(NSAttributedString(attachment: imageAttachment))
+        attributeString.append(NSAttributedString(string: " 3시간 간격의 일기예보"))
+        headerLabel.attributedText = attributeString
     }
     
 }
