@@ -123,6 +123,11 @@ final class MainViewController: BaseViewController {
             guard let self else { return }
             configureWeatherView()
         }
+        viewModel.outputForecastResponse.bind { [weak self] _ in
+            guard let self else { return }
+            collectionView.reloadData()
+            tableView.reloadData()
+        }
     }
     
     override func configureNavigationBar() {
@@ -324,18 +329,23 @@ final class MainViewController: BaseViewController {
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return viewModel.outputForecastResponse.value?.list.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: WeatherCollectionViewCell.identifier,
             for: indexPath
-        ) as? WeatherCollectionViewCell else {
+        ) as? WeatherCollectionViewCell,
+              let data = viewModel.outputForecastResponse.value?.list[indexPath.item] else {
             return UICollectionViewCell()
         }
         
-        cell.backgroundColor = .orange
+        cell.configureCell(
+            hour: data.hour,
+            image: UIImage(systemName: "sun.max")!,
+            temp: data.main.tempCelsius
+        )
         return cell
     }
 }

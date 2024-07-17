@@ -31,6 +31,7 @@
 		2466E3902C45443C00D675B2 /* ForecastResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E38F2C45443C00D675B2 /* ForecastResponse.swift */; };
 		2466E3932C45498D00D675B2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3922C45498D00D675B2 /* MainViewModel.swift */; };
 		2466E3952C4549FC00D675B2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3942C4549FC00D675B2 /* Observable.swift */; };
+		2466E3A22C46365200D675B2 /* CityList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2466E3A12C46365200D675B2 /* CityList.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		2466E38F2C45443C00D675B2 /* ForecastResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastResponse.swift; sourceTree = "<group>"; };
 		2466E3922C45498D00D675B2 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		2466E3942C4549FC00D675B2 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		2466E3A12C46365200D675B2 /* CityList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CityList.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				2466E37B2C429A7600D675B2 /* Custom */,
 				2466E37E2C429AC500D675B2 /* Scenes */,
 				2466E3542C4155C100D675B2 /* Assets.xcassets */,
+				2466E3A12C46365200D675B2 /* CityList.json */,
 				2466E3562C4155C100D675B2 /* LaunchScreen.storyboard */,
 				2466E3592C4155C200D675B2 /* Info.plist */,
 			);
@@ -236,6 +239,7 @@
 			files = (
 				2466E3602C41565200D675B2 /* .gitignore in Resources */,
 				2466E3552C4155C100D675B2 /* Assets.xcassets in Resources */,
+				2466E3A22C46365200D675B2 /* CityList.json in Resources */,
 				2466E3582C4155C100D675B2 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
