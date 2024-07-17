@@ -26,6 +26,15 @@ struct List: Decodable {
         case dt, main, weather, clouds, wind
         case dtTxt = "dt_txt"
     }
+    
+    var hour: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        guard let date = formatter.date(from: dtTxt) else { return "" }
+        formatter.dateFormat = "hh"
+        let str = formatter.string(from: date)
+        return str + "시"
+    }
 }
 
 struct City: Decodable {
@@ -33,11 +42,4 @@ struct City: Decodable {
     let name: String
     let coord: Coord
     let country: String
-//    let population, timezone, sunrise, sunset: Int
 }
-
-//struct Wind: Decodable {
-//    let speed: Double
-//    let deg: Int
-//    let gust: Double
-//}
