@@ -9,8 +9,6 @@ import Foundation
 import Alamofire
 
 final class NetworkManager {
-    
-    // 싱글톤으로 생성
     static let shared = NetworkManager()
     private init() {}
     
@@ -18,7 +16,7 @@ final class NetworkManager {
         api: NetworkRequest,
         model: T.Type,
         completionHandler: @escaping (
-            Result<T, Error>) -> Void
+            Result<T, AFError>) -> Void
     ) {
         AF.request(api.endpoint,
                    method: api.method,

@@ -28,10 +28,11 @@ struct List: Decodable {
     }
     
     var hour: String {
+        // "dt_txt": "2024-07-15 12:00:00"
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         guard let date = formatter.date(from: dtTxt) else { return "" }
-        formatter.dateFormat = "hh"
+        formatter.dateFormat = "HH"
         let str = formatter.string(from: date)
         return str + "시"
     }
