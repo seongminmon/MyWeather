@@ -18,10 +18,10 @@ enum ForecastOutput {
     
     // 5일 간의 일기예보
     struct Day {
-        let day: String
-        let iconURL: URL?
-        let tempMin: String
-        let tempMax: String
+        var day: String
+        var iconURL: URL?
+        var tempMin: String
+        var tempMax: String
     }
     
 }

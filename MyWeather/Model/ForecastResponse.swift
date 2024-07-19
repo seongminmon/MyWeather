@@ -26,18 +26,6 @@ struct List: Decodable {
         case dt, main, weather, clouds, wind
         case dtTxt = "dt_txt"
     }
-    
-    var date: Date {
-        return Format.stringToDate(dtTxt, dateFormat: "yyyy-MM-dd HH:mm:ss")
-    }
-    
-    var hour: String {
-        return Format.dateToString(date, dateFormat: "HH") + "시"
-    }
-    
-    var day: String {
-        return Format.dateToString(date, dateFormat: "E")
-    }
 }
 
 struct Coord: Decodable {
@@ -50,9 +38,7 @@ struct Weather: Decodable {
 }
 
 struct Main: Decodable {
-    // 현재 온도, 최고 온도, 최저 온도
     let temp, tempMin, tempMax: Double
-    // 기압, 습도
     let pressure, humidity: Int
 
     enum CodingKeys: String, CodingKey {

@@ -11,6 +11,7 @@ enum Format {
     static let formatter = DateFormatter()
     
     static func stringToDate(_ str: String, dateFormat: String) -> Date {
+        formatter.locale = Locale(identifier: "ko-KR")
         formatter.dateFormat = dateFormat
         return formatter.date(from: str) ?? Date()
     }

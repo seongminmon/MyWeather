@@ -71,50 +71,67 @@ final class MainViewModel: BaseViewModel {
     
     private func forecastResponseToHour(_ data: ForecastResponse) -> [ForecastOutput.Hour] {
         var ret = [ForecastOutput.Hour]()
-        for item in data.list {
+        
+        // 3일간만 보여주기
+        for i in 0..<24 {
+            let item = data.list[i]
+            let date = Format.stringToDate(item.dtTxt, dateFormat: "yyyy-MM-dd HH:mm:ss")
             let icon = item.weather.first?.icon ?? ""
-            let url = URL(string: APIURL.iconURL + icon + "@2x.png")
-            let hour = ForecastOutput.Hour(
-                hour: item.hour,
-                iconURL: url,
+            
+            let value = ForecastOutput.Hour(
+                hour: Format.dateToString(date, dateFormat: "HH") + "시",
+                iconURL: URL(string: APIURL.iconURL + icon + "@2x.png"),
                 temp: item.main.temp.makeToString() + "°"
             )
-            ret.append(hour)
-            
-            // 3일간만 보여주기
-            if ret.count >= 24 { break }
+            ret.append(value)
         }
         return ret
     }
     
     private func forecastResponseToDay(_ data: ForecastResponse) -> [ForecastOutput.Day] {
-        return []
+        var ret = [ForecastOutput.Day]()
+        
+        // 00시 기준으로 나누기 (날짜별로)
+        let splitList = data.list.split { item in
+            let date = Format.stringToDate(item.dtTxt, dateFormat: "yyyy-MM-dd HH:mm:ss")
+            let hour = Format.dateToString(date, dateFormat: "HH")
+            return hour == "00"
+        }
+        
+        // 5일간의 일기 예보
+        for i in 0..<5 {
+            var tempDay = ForecastOutput.Day(day: "", iconURL: nil, tempMin: "", tempMax: "")
+            var Min = Double(Int.max)
+            var Max = Double(Int.min)
+            
+            for item in splitList[i] {
+                // 날짜
+                let date = Format.stringToDate(item.dtTxt, dateFormat: "yyyy-MM-dd HH:mm:ss")
+                let day = Format.dateToString(date, dateFormat: "E")
+                tempDay.day = day
+                
+                // 아이콘은 21시 기준으로
+                let hour = Format.dateToString(date, dateFormat: "HH")
+                let icon = item.weather.first?.icon ?? ""
+                if hour == "21" {
+                    tempDay.iconURL = URL(string: APIURL.iconURL + icon + "@2x.png")
+                }
+                
+                let temp = item.main.temp.makeToString() + "°"
+                if Min > item.main.temp {
+                    Min = item.main.temp
+                    tempDay.tempMin = "최저 " + temp
+                }
+                if Max < item.main.temp {
+                    Max = item.main.temp
+                    tempDay.tempMax = "최고 " + temp
+                }
+            }
+            if i == 0 { tempDay.day = "오늘" }
+            
+            ret.append(tempDay)
+        }
+        dump(ret)
+        return ret
     }
-    
-//        dayLabel.text = "오늘"
-//        iconImageView.image = UIImage(systemName: "sun.max")
-//        minTempLabel.text = "최저 -2°"
-//        maxTempLabel.text = "최고 9°"
-    
-//    var temp = Forecast(day: "", icon: "", minTemp: "", maxTemp: "")
-//    for item in data.list {
-//        // 날짜가 바뀌었다면 기존 temp 추가 후 전체 교체
-//        if temp.day != item.day {
-//            outputForcastList.value.append(temp)
-//            temp = Forecast(
-//                day: item.day,
-//                icon: item.weather.first?.icon ?? "",
-//                minTemp: item.main.tempMinCelsius,
-//                maxTemp: item.main.tempMaxCelsius
-//            )
-//        } else {
-//            // 같은 날짜이면 갱신하기
-//            temp.minTemp =
-//        }
-//
-//        // 종료 조건
-//        if outputForcastList.value.count == 5 {
-//            break
-//        }
-//    }
 }

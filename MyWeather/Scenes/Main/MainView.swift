@@ -84,6 +84,7 @@ final class MainView: BaseView {
         $0.register(WeatherTableViewCell.self, forCellReuseIdentifier: WeatherTableViewCell.description())
         $0.rowHeight = 60
         $0.isScrollEnabled = false
+        $0.backgroundColor = .clear
     }
     
     private let mapContainerView = ContainerView().then {

@@ -10,17 +10,6 @@ import Kingfisher
 import SnapKit
 import Then
 
-// 5일 간의 일기예보 - 오늘, 화, 수, 목, 금
-enum Week: String {
-    case mon = "월"
-    case tue = "화"
-    case wed = "수"
-    case thur = "목"
-    case fri = "금"
-    case sat = "토"
-    case sun = "일"
-}
-
 final class WeatherTableViewCell: BaseTableViewCell {
     
     private let dayLabel = UILabel().then {
@@ -31,7 +20,7 @@ final class WeatherTableViewCell: BaseTableViewCell {
     
     private let minTempLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 20)
-        $0.textColor = .systemGray
+        $0.textColor = .systemGray2
         $0.textAlignment = .center
     }
     
@@ -70,6 +59,10 @@ final class WeatherTableViewCell: BaseTableViewCell {
             $0.trailing.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
         }
+    }
+    
+    override func configureView() {
+        backgroundColor = .clear
     }
     
     func configureCell(data: ForecastOutput.Day?) {
