@@ -43,15 +43,15 @@ struct Main: Decodable {
     }
     
     var tempCelsius: String {
-        return String(format: "%.2f", temp - 273.15)
+        return String(format: "%.1f", temp - 273.15)
     }
     
     var tempMinCelsius: String {
-        return String(format: "%.2f", tempMin - 273.15)
+        return String(format: "%.1f", tempMin - 273.15)
     }
     
     var tempMaxCelsius: String {
-        return String(format: "%.2f", tempMax - 273.15)
+        return String(format: "%.1f", tempMax - 273.15)
     }
 }
 

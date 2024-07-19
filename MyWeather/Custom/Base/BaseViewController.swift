@@ -38,27 +38,3 @@ class BaseViewController<View: BaseView, ViewModel: BaseViewModel>: UIViewContro
     func configureView() {}
     func bindData() {}
 }
-
-extension BaseViewController {
-    static func collectionViewLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        
-        let sectionSpacing: CGFloat = 10
-        let cellSpacing: CGFloat = 10
-        
-        // 셀 사이즈
-        let width: CGFloat = 50
-        let height: CGFloat = 150
-        layout.itemSize = CGSize(width: width, height: height)
-        // 스크롤 방향
-        layout.scrollDirection = .horizontal
-        // 셀 사이 거리 (가로)
-        layout.minimumInteritemSpacing = cellSpacing
-        // 셀 사이 거리 (세로)
-        layout.minimumLineSpacing = cellSpacing
-        // 섹션 인셋
-        layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
-        
-        return layout
-    }
-}

@@ -11,54 +11,72 @@ import SnapKit
 import Then
 
 final class MainView: BaseView {
-    let scrollView = UIScrollView().then {
+    
+    private let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
     }
     
-    let contentView = UIView()
+    private let contentView = UIView()
     
-    let backgroundImageView = UIImageView().then {
+    private let backgroundImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
     }
     
-    let weatherView = UIView()
+    private let weatherView = UIView()
     
-    let cityNameLabel = UILabel().then {
+    private let cityNameLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 30)
         $0.textAlignment = .center
     }
     
-    let temparatureLabel = UILabel().then {
+    private let temparatureLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 80)
         $0.textAlignment = .center
     }
     
-    let weatherDescriptionLabel = UILabel().then {
+    private let weatherDescriptionLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 24)
         $0.textAlignment = .center
     }
     
-    let temparatureDescriptionLabel = UILabel().then {
+    private let temparatureDescriptionLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 24)
         $0.textAlignment = .center
     }
     
-    let hourContainerView = ContainerView().then {
+    private let hourContainerView = ContainerView().then {
         $0.configureLabel(imageName: "calendar", text: " 3시간 간격의 일기예보")
     }
     
-    let collectionView = UICollectionView(
+    private let collectionViewLayout = UICollectionViewFlowLayout().then {
+        let sectionSpacing: CGFloat = 10
+        let cellSpacing: CGFloat = 10
+        
+        // 셀 사이즈
+        let width: CGFloat = 50
+        let height: CGFloat = 120
+        $0.itemSize = CGSize(width: width, height: height)
+        // 스크롤 방향
+        $0.scrollDirection = .horizontal
+        // 셀 사이 거리 (가로)
+        $0.minimumInteritemSpacing = cellSpacing
+        // 셀 사이 거리 (세로)
+        $0.minimumLineSpacing = cellSpacing
+        // 섹션 인셋
+        $0.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
+    }
+    
+    lazy var collectionView = UICollectionView(
         frame: .zero,
-        collectionViewLayout: BaseViewController.collectionViewLayout()
+        collectionViewLayout: collectionViewLayout
     ).then {
-
         $0.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: WeatherCollectionViewCell.description())
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .clear
     }
     
-    let dayContainerView = ContainerView().then {
+    private let dayContainerView = ContainerView().then {
         $0.configureLabel(imageName: "calendar", text: "  5일 간의 일기예보")
     }
     
@@ -68,41 +86,41 @@ final class MainView: BaseView {
         $0.isScrollEnabled = false
     }
     
-    let mapContainerView = ContainerView().then {
+    private let mapContainerView = ContainerView().then {
         $0.configureLabel(imageName: "thermometer.medium", text: " 위치")
     }
     
-    let mapView = MKMapView()
+    private let mapView = MKMapView()
     
-    let windSpeedContainerView = ContainerView().then {
+    private let windSpeedContainerView = ContainerView().then {
         $0.configureLabel(imageName: "wind", text: " 바람 속도")
     }
     
-    let windSpeedLabel = UILabel().then {
+    private let windSpeedLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 24)
     }
     
-    let cloudContainerView = ContainerView().then {
+    private let cloudContainerView = ContainerView().then {
         $0.configureLabel(imageName: "drop.fill", text: " 구름")
     }
     
-    let cloudLabel = UILabel().then {
+    private let cloudLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 24)
     }
     
-    let barometerContainerView = ContainerView().then {
+    private let barometerContainerView = ContainerView().then {
         $0.configureLabel(imageName: "thermometer.medium", text: " 기압")
     }
     
-    let barometerLabel = UILabel().then {
+    private let barometerLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 24)
     }
     
-    let humidityContainerView = ContainerView().then {
+    private let humidityContainerView = ContainerView().then {
         $0.configureLabel(imageName: "humidity", text: " 습도")
     }
     
-    let humidityLabel = UILabel().then {
+    private let humidityLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 24)
     }
     
@@ -173,7 +191,7 @@ final class MainView: BaseView {
         hourContainerView.snp.makeConstraints {
             $0.top.equalTo(weatherView.snp.bottom).offset(30)
             $0.horizontalEdges.equalToSuperview().inset(16)
-            $0.height.equalTo(30 + 200)
+            $0.height.equalTo(30 + 150)
         }
         
         collectionView.snp.makeConstraints {
@@ -257,19 +275,6 @@ final class MainView: BaseView {
         backgroundImageView.image = UIImage(named: "cloud")
     }
     
-    func configureWeatherView(_ data: WeatherResponse?) {
-        guard let data else { return }
-        cityNameLabel.text = data.name
-        temparatureLabel.text = " \(data.main.tempCelsius)°"
-        weatherDescriptionLabel.text = data.weather.first!.description
-        temparatureDescriptionLabel.text = "최고: \(data.main.tempMaxCelsius)° | 최저: \(data.main.tempMinCelsius)°"
-        
-        windSpeedLabel.text = "\(data.wind.speed)m/s"
-        cloudLabel.text = "\(data.clouds.all)%"
-        barometerLabel.text = "\(data.main.pressure)hpa"
-        humidityLabel.text = "\(data.main.humidity)%"
-    }
-    
     override func configureNavigationBar(_ vc: UIViewController) {
         // 툴바 설정
         let mapButton = UIBarButtonItem(image: UIImage(systemName: "map"), style: .plain, target: self, action: #selector(mapButtonTapped))
@@ -291,6 +296,19 @@ final class MainView: BaseView {
         toolbarAppearance.configureWithDefaultBackground()
         vc.navigationController?.toolbar.standardAppearance = toolbarAppearance
         vc.navigationController?.toolbar.scrollEdgeAppearance = toolbarAppearance
+    }
+    
+    func configureWeatherView(_ data: WeatherResponse?) {
+        guard let data else { return }
+        cityNameLabel.text = data.name
+        temparatureLabel.text = " \(data.main.tempCelsius)°"
+        weatherDescriptionLabel.text = data.weather.first!.description
+        temparatureDescriptionLabel.text = "최고: \(data.main.tempMaxCelsius)° | 최저: \(data.main.tempMinCelsius)°"
+        
+        windSpeedLabel.text = "\(data.wind.speed)m/s"
+        cloudLabel.text = "\(data.clouds.all)%"
+        barometerLabel.text = "\(data.main.pressure)hpa"
+        humidityLabel.text = "\(data.main.humidity)%"
     }
     
     @objc func mapButtonTapped() {

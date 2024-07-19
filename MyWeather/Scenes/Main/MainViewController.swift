@@ -46,16 +46,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: WeatherCollectionViewCell.description(),
             for: indexPath
-        ) as? WeatherCollectionViewCell,
-              let data = viewModel.outputForecastResponse.value?.list[indexPath.item] else {
+        ) as? WeatherCollectionViewCell else {
             return UICollectionViewCell()
         }
         
-        cell.configureCell(
-            hour: data.hour,
-            image: UIImage(systemName: "sun.max")!,
-            temp: data.main.tempCelsius
-        )
+        let data = viewModel.outputForecastResponse.value?.list[indexPath.item]
+        cell.configureCell(data: data)
         return cell
     }
 }
