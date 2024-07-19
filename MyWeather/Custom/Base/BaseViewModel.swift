@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+class BaseViewModel {
+    
+    init() {
+        transform()
+    }
+    
+    func transform() {}
+}

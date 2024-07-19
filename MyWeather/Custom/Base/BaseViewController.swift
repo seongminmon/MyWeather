@@ -7,23 +7,39 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class BaseViewController<View: BaseView, ViewModel: BaseViewModel>: UIViewController {
+    
+    let baseView: View
+    let viewModel: ViewModel
+    
+    init(view: View, viewModel: ViewModel) {
+        self.baseView = view
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        self.view = baseView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         navigationItem.backButtonDisplayMode = .minimal
-        configureNavigationBar()
-        addSubviews()
-        configureLayout()
         configureView()
+        bindData()
     }
     
-    func configureNavigationBar() {}
-    func addSubviews() {}
-    func configureLayout() {}
     func configureView() {}
-    
+    func bindData() {}
+}
+
+extension BaseViewController {
     static func collectionViewLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
         
@@ -32,7 +48,7 @@ class BaseViewController: UIViewController {
         
         // 셀 사이즈
         let width: CGFloat = 50
-        let height: CGFloat = width * 3
+        let height: CGFloat = 150
         layout.itemSize = CGSize(width: width, height: height)
         // 스크롤 방향
         layout.scrollDirection = .horizontal
