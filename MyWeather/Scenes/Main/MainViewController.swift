@@ -24,14 +24,18 @@ final class MainViewController: BaseViewController<MainView, MainViewModel> {
     }
     
     override func bindData() {
-        viewModel.outputWeatherResponse.bind { [weak self] _ in
-            guard let self else { return }
-            baseView.configureWeatherView(viewModel.outputWeatherResponse.value)
+        viewModel.outputWeather.bind { [weak self] value in
+            guard let self, let value else { return }
+            baseView.configureWeatherView(value)
         }
         
-        viewModel.outputForecastResponse.bind { [weak self] _ in
+        viewModel.outputForeCastHourList.bind { [weak self] _ in
             guard let self else { return }
             baseView.collectionView.reloadData()
+        }
+        
+        viewModel.outputForeCastDayList.bind { [weak self] _ in
+            guard let self else { return }
             baseView.tableView.reloadData()
         }
     }
@@ -39,7 +43,7 @@ final class MainViewController: BaseViewController<MainView, MainViewModel> {
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.outputForecastResponse.value?.list.count ?? 0
+        return viewModel.outputForeCastHourList.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -50,7 +54,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
             return UICollectionViewCell()
         }
         
-        let data = viewModel.outputForecastResponse.value?.list[indexPath.item]
+        let data = viewModel.outputForeCastHourList.value[indexPath.item]
         cell.configureCell(data: data)
         return cell
     }
@@ -58,7 +62,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel.outputForeCastDayList.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -68,7 +72,9 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         ) as? WeatherTableViewCell else {
             return UITableViewCell()
         }
-        cell.backgroundColor = .purple
+        
+        let data = viewModel.outputForeCastDayList.value[indexPath.row]
+        cell.configureCell(data: data)
         return cell
     }
 }

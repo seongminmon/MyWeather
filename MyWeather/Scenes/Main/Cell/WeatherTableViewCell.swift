@@ -72,10 +72,11 @@ final class WeatherTableViewCell: BaseTableViewCell {
         }
     }
     
-    override func configureView() {
-        dayLabel.text = "오늘"
-        iconImageView.image = UIImage(systemName: "sun.max")
-        minTempLabel.text = "최저 -2°"
-        maxTempLabel.text = "최고 9°"
+    func configureCell(data: ForecastOutput.Day?) {
+        guard let data else { return }
+        dayLabel.text = data.day
+        iconImageView.kf.setImage(with: data.iconURL)
+        minTempLabel.text = data.tempMin
+        maxTempLabel.text = data.tempMax
     }
 }

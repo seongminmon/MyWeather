@@ -298,17 +298,17 @@ final class MainView: BaseView {
         vc.navigationController?.toolbar.scrollEdgeAppearance = toolbarAppearance
     }
     
-    func configureWeatherView(_ data: WeatherResponse?) {
+    func configureWeatherView(_ data: WeatherOutput?) {
         guard let data else { return }
-        cityNameLabel.text = data.name
-        temparatureLabel.text = " \(data.main.tempCelsius)°"
-        weatherDescriptionLabel.text = data.weather.first!.description
-        temparatureDescriptionLabel.text = "최고: \(data.main.tempMaxCelsius)° | 최저: \(data.main.tempMinCelsius)°"
+        cityNameLabel.text = data.cityName
+        temparatureLabel.text = data.temp
+        weatherDescriptionLabel.text = data.description
+        temparatureDescriptionLabel.text = data.tempDescription
         
-        windSpeedLabel.text = "\(data.wind.speed)m/s"
-        cloudLabel.text = "\(data.clouds.all)%"
-        barometerLabel.text = "\(data.main.pressure)hpa"
-        humidityLabel.text = "\(data.main.humidity)%"
+        windSpeedLabel.text = data.wind
+        cloudLabel.text = data.cloud
+        barometerLabel.text = data.barometer
+        humidityLabel.text = data.humidity
     }
     
     @objc func mapButtonTapped() {

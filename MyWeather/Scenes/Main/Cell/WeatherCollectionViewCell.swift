@@ -47,12 +47,10 @@ final class WeatherCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    func configureCell(data: List?) {
+    func configureCell(data: ForecastOutput.Hour?) {
         guard let data else { return }
         hourLabel.text = data.hour
-        let icon = data.weather.first?.icon ?? ""
-        let url = URL(string: APIURL.iconURL + icon + "@2x.png")
-        iconImageView.kf.setImage(with: url)
-        tempLabel.text = data.main.tempCelsius + "°"
+        iconImageView.kf.setImage(with: data.iconURL)
+        tempLabel.text = data.temp
     }
 }

@@ -20,12 +20,12 @@ final class Observable<T> {
         self.value = value
     }
     
-    func bindEarly(closure: @escaping (T) -> Void) {
-        closure(value)
+    func bind(closure: @escaping (T) -> Void) {
         self.closure = closure
     }
     
-    func bind(closure: @escaping (T) -> Void) {
+    func bindEarly(closure: @escaping (T) -> Void) {
+        closure(value)
         self.closure = closure
     }
 }
