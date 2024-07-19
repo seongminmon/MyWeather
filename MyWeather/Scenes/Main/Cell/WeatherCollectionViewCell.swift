@@ -10,7 +10,7 @@ import Kingfisher
 import SnapKit
 import Then
 
-class WeatherCollectionViewCell: BaseCollectionViewCell {
+final class WeatherCollectionViewCell: BaseCollectionViewCell {
     
     let hourLabel = UILabel().then {
         $0.font = .boldSystemFont(ofSize: 16)
