@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class MainViewModel {
+final class MainViewModel: BaseViewModel {
     
     // Input
     var inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)
@@ -16,11 +16,7 @@ final class MainViewModel {
     var outputWeatherResponse: Observable<WeatherResponse?> = Observable(nil)
     var outputForecastResponse: Observable<ForecastResponse?> = Observable(nil)
     
-    init() {
-        transform()
-    }
-    
-    private func transform() {
+    override func transform() {
         inputViewDidLoadTrigger.bind { [weak self] value in
             guard let self, value != nil else { return }
             callRequest()

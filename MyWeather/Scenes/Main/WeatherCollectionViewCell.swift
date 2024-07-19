@@ -51,10 +51,6 @@ class WeatherCollectionViewCell: BaseCollectionViewCell {
         }
     }
     
-    override func configureView() {
-        
-    }
-    
     func configureCell(hour: String, image: UIImage, temp: String) {
         hourLabel.text = hour
         iconImageView.image = image
