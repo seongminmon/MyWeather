@@ -7,36 +7,6 @@
 
 import Foundation
 
-enum ForecastOutput {
-    
-    // 3시간 간격의 일기예보
-    struct Hour {
-        let hour: String
-        let iconURL: URL
-        let temp: String
-        
-//        hourLabel.text = data.hour
-//        let icon = data.weather.first?.icon ?? ""
-//        let url = URL(string: APIURL.iconURL + icon + "@2x.png")
-//        iconImageView.kf.setImage(with: url)
-//        tempLabel.text = data.main.tempCelsius + "°"
-    }
-    
-    // 5일 간의 일기예보
-    struct Day {
-        let day: String
-        let iconURL: URL
-        let tempMin: String
-        let tempMax: String
-//        dayLabel.text = "오늘"
-//        iconImageView.image = UIImage(systemName: "sun.max")
-//        minTempLabel.text = "최저 -2°"
-//        maxTempLabel.text = "최고 9°"
-    }
-    
-}
-
-
 final class MainViewModel: BaseViewModel {
     
     // Input
@@ -48,10 +18,6 @@ final class MainViewModel: BaseViewModel {
     var outputForeCastDayList: Observable<[ForecastOutput.Day]> = Observable([])
     
     override func transform() {
-//        inputViewDidLoadTrigger.bind { [weak self] value in
-//            guard let self, value != nil else { return }
-//            callRequest()
-//        }
         inputViewDidLoadTrigger.bind { [weak self] _ in
             guard let self else { return }
             callRequest()
@@ -80,28 +46,6 @@ final class MainViewModel: BaseViewModel {
                 // 2. 5일 간의 일기예보
                 outputForeCastDayList.value = forecastResponseToDay(data)
                 
-//                var temp = Forecast(day: "", icon: "", minTemp: "", maxTemp: "")
-//                for item in data.list {
-//                    // 날짜가 바뀌었다면 기존 temp 추가 후 전체 교체
-//                    if temp.day != item.day {
-//                        outputForcastList.value.append(temp)
-//                        temp = Forecast(
-//                            day: item.day,
-//                            icon: item.weather.first?.icon ?? "",
-//                            minTemp: item.main.tempMinCelsius,
-//                            maxTemp: item.main.tempMaxCelsius
-//                        )
-//                    } else {
-//                        // 같은 날짜이면 갱신하기
-//                        temp.minTemp = 
-//                    }
-//                    
-//                    // 종료 조건
-//                    if outputForcastList.value.count == 5 {
-//                        break
-//                    }
-//                }
-                
             case .failure(let error):
                 print(error)
             }
@@ -126,10 +70,51 @@ final class MainViewModel: BaseViewModel {
     }
     
     private func forecastResponseToHour(_ data: ForecastResponse) -> [ForecastOutput.Hour] {
-        return []
+        var ret = [ForecastOutput.Hour]()
+        for item in data.list {
+            let icon = item.weather.first?.icon ?? ""
+            let url = URL(string: APIURL.iconURL + icon + "@2x.png")
+            let hour = ForecastOutput.Hour(
+                hour: item.hour,
+                iconURL: url,
+                temp: item.main.temp.makeToString() + "°"
+            )
+            ret.append(hour)
+            
+            // 3일간만 보여주기
+            if ret.count >= 24 { break }
+        }
+        return ret
     }
     
     private func forecastResponseToDay(_ data: ForecastResponse) -> [ForecastOutput.Day] {
         return []
     }
+    
+//        dayLabel.text = "오늘"
+//        iconImageView.image = UIImage(systemName: "sun.max")
+//        minTempLabel.text = "최저 -2°"
+//        maxTempLabel.text = "최고 9°"
+    
+//    var temp = Forecast(day: "", icon: "", minTemp: "", maxTemp: "")
+//    for item in data.list {
+//        // 날짜가 바뀌었다면 기존 temp 추가 후 전체 교체
+//        if temp.day != item.day {
+//            outputForcastList.value.append(temp)
+//            temp = Forecast(
+//                day: item.day,
+//                icon: item.weather.first?.icon ?? "",
+//                minTemp: item.main.tempMinCelsius,
+//                maxTemp: item.main.tempMaxCelsius
+//            )
+//        } else {
+//            // 같은 날짜이면 갱신하기
+//            temp.minTemp =
+//        }
+//
+//        // 종료 조건
+//        if outputForcastList.value.count == 5 {
+//            break
+//        }
+//    }
 }
