@@ -12,16 +12,16 @@ import Then
 
 final class WeatherCollectionViewCell: BaseCollectionViewCell {
     
-    let hourLabel = UILabel().then {
+    private let hourLabel = UILabel().then {
         $0.font = .boldSystemFont(ofSize: 16)
         $0.textAlignment = .center
     }
     
-    let iconImageView = UIImageView().then {
+    private let iconImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
     }
     
-    let tempLabel = UILabel().then {
+    private let tempLabel = UILabel().then {
         $0.font = .boldSystemFont(ofSize: 16)
         $0.textAlignment = .center
     }

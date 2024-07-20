@@ -128,10 +128,8 @@ final class MainViewModel: BaseViewModel {
                 }
             }
             if i == 0 { tempDay.day = "오늘" }
-            
             ret.append(tempDay)
         }
-        dump(ret)
         return ret
     }
 }

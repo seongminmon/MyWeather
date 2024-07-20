@@ -10,6 +10,11 @@ import MapKit
 import SnapKit
 import Then
 
+protocol MainViewDelegate: AnyObject {
+    func mapButtonTapped()
+    func cityButtonTapped()
+}
+
 final class MainView: BaseView {
     
     private let scrollView = UIScrollView().then {
@@ -124,6 +129,8 @@ final class MainView: BaseView {
     private let humidityLabel = UILabel().then {
         $0.font = .systemFont(ofSize: 24)
     }
+    
+    var delegate: MainViewDelegate?
     
     override func addSubviews() {
         addSubview(backgroundImageView)
@@ -313,10 +320,10 @@ final class MainView: BaseView {
     }
     
     @objc func mapButtonTapped() {
-        print(#function)
+        delegate?.mapButtonTapped()
     }
     
     @objc func cityButtonTapped() {
-        print(#function)
+        delegate?.cityButtonTapped()
     }
 }

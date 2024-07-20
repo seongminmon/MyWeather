@@ -12,6 +12,7 @@ final class MainViewController: BaseViewController<MainView, MainViewModel> {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        baseView.delegate = self
         viewModel.inputViewDidLoadTrigger.value = ()
     }
     
@@ -76,5 +77,16 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         let data = viewModel.outputForeCastDayList.value[indexPath.row]
         cell.configureCell(data: data)
         return cell
+    }
+}
+
+extension MainViewController: MainViewDelegate {
+    func mapButtonTapped() {
+        print(#function)
+    }
+    
+    func cityButtonTapped() {
+        let vc = CityViewController(view: CityView(), viewModel: CityViewModel())
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
