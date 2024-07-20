@@ -11,6 +11,13 @@ final class CityViewController: BaseViewController<CityView, CityViewModel> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .purple
+    }
+    
+    override func configureView() {
+        
+    }
+    
+    override func bindData() {
+        
     }
 }

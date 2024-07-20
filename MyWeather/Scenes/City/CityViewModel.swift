@@ -9,4 +9,11 @@ import Foundation
 
 final class CityViewModel: BaseViewModel {
     
+    // Input
+    
+    // Output
+    
+    override func transform() {
+        
+    }
 }
