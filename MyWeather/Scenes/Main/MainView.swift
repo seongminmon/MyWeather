@@ -313,6 +313,19 @@ final class MainView: BaseView {
         weatherDescriptionLabel.text = data.description
         temparatureDescriptionLabel.text = data.tempDescription
         
+        // center를 중심으로 이동
+        let center = CLLocationCoordinate2D(latitude: data.coord.lat, longitude: data.coord.lon)
+        let region = MKCoordinateRegion(center: center, latitudinalMeters: 500, longitudinalMeters: 500)
+        mapView.setRegion(region, animated: true)
+        
+        // 기존 annotation 삭제
+        mapView.removeAnnotations(mapView.annotations)
+        
+        // 맵뷰에 annotaion 추가
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = center
+        mapView.addAnnotation(annotation)
+        
         windSpeedLabel.text = data.wind
         cloudLabel.text = data.cloud
         barometerLabel.text = data.barometer
