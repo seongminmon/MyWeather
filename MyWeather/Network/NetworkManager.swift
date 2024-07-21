@@ -18,10 +18,12 @@ final class NetworkManager {
         completionHandler: @escaping (
             Result<T, AFError>) -> Void
     ) {
-        AF.request(api.endpoint,
-                   method: api.method,
-                   parameters: api.parameters,
-                   encoding: api.encoding)
+        AF.request(
+            api.endpoint,
+            method: api.method,
+            parameters: api.parameters,
+            encoding: api.encoding
+        )
         .validate(statusCode: 200..<500)
         .responseDecodable(of: T.self) { response in
             switch response.result {

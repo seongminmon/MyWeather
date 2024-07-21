@@ -28,7 +28,14 @@ struct List: Decodable {
     }
 }
 
-struct Coord: Decodable {
+struct City: Decodable, Hashable, Identifiable {
+    let id: Int
+    let name: String
+    let coord: Coord
+    let country: String
+}
+
+struct Coord: Decodable, Hashable {
     let lon, lat: Double
 }
 
@@ -61,11 +68,4 @@ struct Sys: Decodable {
 struct Wind: Decodable {
     let speed: Double
     let deg: Int
-}
-
-struct City: Decodable {
-    let id: Int
-    let name: String
-    let coord: Coord
-    let country: String
 }
