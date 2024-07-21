@@ -28,7 +28,7 @@ final class CityView: BaseView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureDataSource()
-        updateSnapshot()
+        updateSnapshot([])
     }
     
     override func configureNavigationBar(_ vc: UIViewController) {
@@ -69,17 +69,10 @@ final class CityView: BaseView {
         }
     }
     
-    private func updateSnapshot() {
+    func updateSnapshot(_ items: [City]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, City>()
         snapshot.appendSections(Section.allCases)
-        snapshot.appendItems(
-            [
-                City(id: 0, name: "서울", coord: Coord(lon: 123, lat: 123), country: "KR"),
-                City(id: 1, name: "대구", coord: Coord(lon: 123, lat: 123), country: "KR"),
-                City(id: 2, name: "부산", coord: Coord(lon: 123, lat: 123), country: "KR"),
-            ],
-            toSection: .main
-        )
+        snapshot.appendItems(items, toSection: .main)
         dataSource.apply(snapshot)
     }
 }

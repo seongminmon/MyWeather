@@ -10,10 +10,40 @@ import Foundation
 final class CityViewModel: BaseViewModel {
     
     // Input
+    var inputViewDidLoad: Observable<Void?> = Observable(nil)
     
     // Output
+    var outputList: Observable<[City]> = Observable([])
     
     override func transform() {
+        inputViewDidLoad.bind { [weak self] value in
+            guard let self, value != nil, let data = loadJson() else { return }
+            do {
+                let list = try JSONDecoder().decode([City].self, from: data)
+                outputList.value = list
+            } catch {
+                outputList.value = []
+            }
+        }
+    }
+    
+    private func loadJson() -> Data? {
+        // 불러올 파일 이름
+        let fileName: String = "CityList"
+        // 불러올 파일의 확장자명
+        let extensionType = "json"
         
+        // 파일 위치
+        guard let fileLocation = Bundle.main.url(forResource: fileName, withExtension: extensionType) else { return nil }
+        
+        do {
+            // 해당 위치의 파일을 Data로 초기화하기
+            let data = try Data(contentsOf: fileLocation)
+            return data
+        } catch {
+            // 잘못된 위치나 불가능한 파일 처리
+            print("로컬 JSON 로드 실패")
+            return nil
+        }
     }
 }
