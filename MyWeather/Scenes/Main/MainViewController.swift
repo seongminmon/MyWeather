@@ -13,7 +13,7 @@ final class MainViewController: BaseViewController<MainView, MainViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
         baseView.delegate = self
-        viewModel.inputCityIDNetworkTrigger.value = ""
+        viewModel.inputCityIDNetworkTrigger.value = Seoul.cityID
     }
     
     override func configureView() {

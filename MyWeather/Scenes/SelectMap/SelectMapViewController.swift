@@ -22,7 +22,7 @@ final class SelectMapViewController: BaseViewController<SelectMapView, SelectMap
     
     override func configureView() {
         // MapView의 시작 위치 설정 (없다면 서울)
-        baseView.configureMapView(startCoord ?? CLLocationCoordinate2D(latitude: 127.0, longitude: 37.583328))
+        baseView.configureMapView(startCoord ?? CLLocationCoordinate2D(latitude: Seoul.coord.lat, longitude: Seoul.coord.lon))
         baseView.delegate = self
     }
     

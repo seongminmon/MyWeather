@@ -16,7 +16,7 @@ protocol SelectMapViewDelegate: AnyObject {
 
 final class SelectMapView: BaseView {
     
-    let mapView = MKMapView()
+    private let mapView = MKMapView()
     
     var delegate: SelectMapViewDelegate?
     
@@ -31,10 +31,7 @@ final class SelectMapView: BaseView {
     }
     
     override func configureView() {
-        let tapGesture = UITapGestureRecognizer(
-            target: self,
-            action: #selector(mapViewTapped)
-        )
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mapViewTapped))
         mapView.addGestureRecognizer(tapGesture)
     }
     
@@ -45,7 +42,7 @@ final class SelectMapView: BaseView {
         setAnnotation(center)
     }
     
-    @objc func mapViewTapped(_ sender: UITapGestureRecognizer) {
+    @objc private func mapViewTapped(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: mapView)
         let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
         setAnnotation(coordinate)
@@ -53,6 +50,7 @@ final class SelectMapView: BaseView {
         delegate?.mapViewTapped(coord: coordinate)
     }
     
+    // TODO: - 모듈화 해보기
     private func setAnnotation(_ coordinate: CLLocationCoordinate2D) {
         // 기존 annotaion 삭제
         mapView.removeAnnotations(mapView.annotations)

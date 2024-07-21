@@ -9,9 +9,6 @@ import Foundation
 
 final class MainViewModel: BaseViewModel {
     
-    let seoul = "1835847"
-    var cityID = ""
-    
     // Input
     var inputCityIDNetworkTrigger = Observable("")
     var inputCoordNetworkTrigger: Observable<Coord?> = Observable(nil)
@@ -24,8 +21,7 @@ final class MainViewModel: BaseViewModel {
     override func transform() {
         inputCityIDNetworkTrigger.bind { [weak self] value in
             guard let self else { return }
-            cityID = value == "" ? seoul : value
-            callRequestWithCityID()
+            callRequestWithCityID(value)
         }
         
         inputCoordNetworkTrigger.bind { [weak self] value in
@@ -34,7 +30,7 @@ final class MainViewModel: BaseViewModel {
         }
     }
     
-    private func callRequestWithCityID() {
+    private func callRequestWithCityID(_ cityID: String) {
         // 네트워크 통신 (도시 ID + 현재 날씨)
         NetworkManager.shared.request(api: .currentCityID(id: cityID), model: WeatherResponse.self) { [weak self] result in
             guard let self else { return }
@@ -55,7 +51,6 @@ final class MainViewModel: BaseViewModel {
                 outputForeCastHourList.value = forecastResponseToHour(data)
                 // 2. 5일 간의 일기예보
                 outputForeCastDayList.value = forecastResponseToDay(data)
-                
             case .failure(let error):
                 print(error)
             }
@@ -63,7 +58,7 @@ final class MainViewModel: BaseViewModel {
     }
     
     private func callRequestWithCoord(_ coord: Coord?) {
-        guard let coord else { return }
+        let coord = coord ?? Seoul.coord
         let lat = String(coord.lat)
         let lon = String(coord.lon)
         
@@ -87,7 +82,6 @@ final class MainViewModel: BaseViewModel {
                 outputForeCastHourList.value = forecastResponseToHour(data)
                 // 2. 5일 간의 일기예보
                 outputForeCastDayList.value = forecastResponseToDay(data)
-                
             case .failure(let error):
                 print(error)
             }

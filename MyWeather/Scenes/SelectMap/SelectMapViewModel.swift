@@ -14,6 +14,6 @@ final class SelectMapViewModel: BaseViewModel {
     // Output
     
     override func transform() {
-        
+        //
     }
 }

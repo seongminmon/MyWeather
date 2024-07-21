@@ -157,7 +157,6 @@
 		2466E34A2C4155C000D675B2 /* MyWeather */ = {
 			isa = PBXGroup;
 			children = (
-				2466E3612C41566800D675B2 /* APIKey.swift */,
 				2466E34B2C4155C000D675B2 /* AppDelegate.swift */,
 				2466E34D2C4155C000D675B2 /* SceneDelegate.swift */,
 				242C63342C4A5EE400C7B229 /* Extension */,
@@ -167,6 +166,7 @@
 				2466E37E2C429AC500D675B2 /* Scenes */,
 				2466E3542C4155C100D675B2 /* Assets.xcassets */,
 				2466E3A12C46365200D675B2 /* CityList.json */,
+				2466E3612C41566800D675B2 /* APIKey.swift */,
 				2466E3562C4155C100D675B2 /* LaunchScreen.storyboard */,
 				2466E3592C4155C200D675B2 /* Info.plist */,
 			);

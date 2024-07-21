@@ -15,8 +15,7 @@ final class NetworkManager {
     func request<T: Decodable>(
         api: NetworkRequest,
         model: T.Type,
-        completionHandler: @escaping (
-            Result<T, AFError>) -> Void
+        completionHandler: @escaping (Result<T, AFError>) -> Void
     ) {
         AF.request(
             api.endpoint,
@@ -28,11 +27,8 @@ final class NetworkManager {
         .responseDecodable(of: T.self) { response in
             switch response.result {
             case .success(let value):
-                print("SUCCESS")
                 completionHandler(.success(value))
-                
             case .failure(let error):
-                print(error)
                 completionHandler(.failure(error))
             }
         }
