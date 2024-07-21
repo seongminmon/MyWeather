@@ -9,8 +9,11 @@ import Foundation
 
 final class CityViewModel: BaseViewModel {
     
+    var cityList = [City]()
+    
     // Input
     var inputViewDidLoad: Observable<Void?> = Observable(nil)
+    var inputSearchBarDidChange = Observable("")
     
     // Output
     var outputList: Observable<[City]> = Observable([])
@@ -19,11 +22,17 @@ final class CityViewModel: BaseViewModel {
         inputViewDidLoad.bind { [weak self] value in
             guard let self, value != nil, let data = loadJson() else { return }
             do {
-                let list = try JSONDecoder().decode([City].self, from: data)
-                outputList.value = list
+                cityList = try JSONDecoder().decode([City].self, from: data)
+                outputList.value = cityList
             } catch {
                 outputList.value = []
             }
+        }
+        
+        inputSearchBarDidChange.bind { [weak self] value in
+            guard let self else { return }
+            search(value)
+            print(value, outputList.value.count)
         }
     }
     
@@ -44,6 +53,18 @@ final class CityViewModel: BaseViewModel {
             // 잘못된 위치나 불가능한 파일 처리
             print("로컬 JSON 로드 실패")
             return nil
+        }
+    }
+    
+    private func search(_ text: String) {
+        // 공백제거, 소문자로 변환
+        let text = text.trimmingCharacters(in: .whitespaces).lowercased()
+        // 빈값이면
+        if text == "" {
+            outputList.value = cityList
+        } else {
+            // 대소문자 구별없이 비교
+            outputList.value = cityList.filter { $0.name.lowercased().contains(text) }
         }
     }
 }

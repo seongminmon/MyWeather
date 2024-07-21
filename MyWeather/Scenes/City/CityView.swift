@@ -11,13 +11,13 @@ import Then
 
 final class CityView: BaseView {
     
-    private func createLayout() -> UICollectionViewLayout {
-        let config = UICollectionLayoutListConfiguration(appearance: .plain)
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
-        return layout
+    let searchBar = UISearchBar().then {
+        $0.placeholder = "도시 이름을 검색해보세요"
     }
     
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
+        $0.keyboardDismissMode = .onDrag
+    }
     
     enum Section: CaseIterable {
         case main
@@ -28,7 +28,6 @@ final class CityView: BaseView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureDataSource()
-        updateSnapshot([])
     }
     
     override func configureNavigationBar(_ vc: UIViewController) {
@@ -36,17 +35,25 @@ final class CityView: BaseView {
     }
     
     override func addSubviews() {
+        addSubview(searchBar)
         addSubview(collectionView)
     }
     
     override func configureLayout() {
+        searchBar.snp.makeConstraints {
+            $0.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
+        }
+        
         collectionView.snp.makeConstraints {
-            $0.edges.equalTo(safeAreaLayoutGuide)
+            $0.top.equalTo(searchBar.snp.bottom)
+            $0.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
         }
     }
     
-    override func configureView() {
-        collectionView.backgroundColor = .red
+    private func createLayout() -> UICollectionViewLayout {
+        let config = UICollectionLayoutListConfiguration(appearance: .plain)
+        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        return layout
     }
     
     private func configureDataSource() {

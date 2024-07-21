@@ -16,6 +16,7 @@ final class CityViewController: BaseViewController<CityView, CityViewModel> {
     
     override func configureView() {
         baseView.configureNavigationBar(self)
+        baseView.searchBar.delegate = self
     }
     
     override func bindData() {
@@ -24,5 +25,10 @@ final class CityViewController: BaseViewController<CityView, CityViewModel> {
             baseView.updateSnapshot(list)
         }
     }
-    
+}
+
+extension CityViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        viewModel.inputSearchBarDidChange.value = searchText
+    }
 }
