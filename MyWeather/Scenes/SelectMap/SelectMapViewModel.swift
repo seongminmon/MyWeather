@@ -9,4 +9,11 @@ import Foundation
 
 final class SelectMapViewModel: BaseViewModel {
     
+    // Input
+    
+    // Output
+    
+    override func transform() {
+        
+    }
 }

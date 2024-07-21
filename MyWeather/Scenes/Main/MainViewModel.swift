@@ -14,6 +14,7 @@ final class MainViewModel: BaseViewModel {
     
     // Input
     var inputCityIDNetworkTrigger = Observable("")
+    var inputCoordNetworkTrigger: Observable<Coord?> = Observable(nil)
     
     // Output
     var outputWeather: Observable<WeatherOutput?> = Observable(nil)
@@ -24,11 +25,16 @@ final class MainViewModel: BaseViewModel {
         inputCityIDNetworkTrigger.bind { [weak self] value in
             guard let self else { return }
             cityID = value == "" ? seoul : value
-            callRequest()
+            callRequestWithCityID()
+        }
+        
+        inputCoordNetworkTrigger.bind { [weak self] value in
+            guard let self else { return }
+            callRequestWithCoord(value)
         }
     }
     
-    private func callRequest() {
+    private func callRequestWithCityID() {
         // 네트워크 통신 (도시 ID + 현재 날씨)
         NetworkManager.shared.request(api: .currentCityID(id: cityID), model: WeatherResponse.self) { [weak self] result in
             guard let self else { return }
@@ -56,6 +62,38 @@ final class MainViewModel: BaseViewModel {
         }
     }
     
+    private func callRequestWithCoord(_ coord: Coord?) {
+        guard let coord else { return }
+        let lat = String(coord.lat)
+        let lon = String(coord.lon)
+        
+        // 네트워크 통신 (도시 ID + 현재 날씨)
+        NetworkManager.shared.request(api: .currentLocation(lat: lat, lon: lon), model: WeatherResponse.self) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let data):
+                outputWeather.value = weatherResponseToOutput(data)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
+        // 네트워크 통신 (도시 ID + 예보)
+        NetworkManager.shared.request(api: .forecastLocation(lat: lat, lon: lon), model: ForecastResponse.self) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let data):
+                // 1. 3시간 간격의 일기예보
+                outputForeCastHourList.value = forecastResponseToHour(data)
+                // 2. 5일 간의 일기예보
+                outputForeCastDayList.value = forecastResponseToDay(data)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
     private func weatherResponseToOutput(_ data: WeatherResponse) -> WeatherOutput {
         let temp = data.main.temp.makeToString()
         let tempMin = data.main.tempMin.makeToString()
@@ -65,7 +103,8 @@ final class MainViewModel: BaseViewModel {
             cityName: data.name,
             temp: " \(temp)°",
             description: data.weather.first!.description,
-            tempDescription: "최고: \(tempMax)° | 최저: \(tempMin)°",
+            tempDescription: "최고: \(tempMax)° | 최저: \(tempMin)°", 
+            coord: data.coord,
             wind: "\(data.wind.speed)m/s",
             cloud: "\(data.clouds.all)%",
             barometer: "\(data.main.pressure)hpa",

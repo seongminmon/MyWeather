@@ -200,8 +200,8 @@
 			isa = PBXGroup;
 			children = (
 				2466E37F2C429AD000D675B2 /* Main */,
-				242C633B2C4BDF6A00C7B229 /* City */,
 				24BB369C2C4D3C1100B40E9C /* SelectMap */,
+				242C633B2C4BDF6A00C7B229 /* City */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
