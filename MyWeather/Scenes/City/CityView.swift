@@ -15,7 +15,10 @@ final class CityView: BaseView {
         $0.placeholder = "도시 이름을 검색해보세요"
     }
     
-    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout()).then {
+    lazy var collectionView = UICollectionView(
+        frame: .zero,
+        collectionViewLayout: createLayout()
+    ).then {
         $0.keyboardDismissMode = .onDrag
     }
     

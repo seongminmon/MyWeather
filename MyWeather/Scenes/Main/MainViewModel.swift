@@ -9,8 +9,11 @@ import Foundation
 
 final class MainViewModel: BaseViewModel {
     
+    let seoul = "1835847"
+    var cityID = ""
+    
     // Input
-    var inputViewDidLoadTrigger: Observable<Void?> = Observable(nil)
+    var inputCityIDNetworkTrigger = Observable("")
     
     // Output
     var outputWeather: Observable<WeatherOutput?> = Observable(nil)
@@ -18,15 +21,16 @@ final class MainViewModel: BaseViewModel {
     var outputForeCastDayList: Observable<[ForecastOutput.Day]> = Observable([])
     
     override func transform() {
-        inputViewDidLoadTrigger.bind { [weak self] _ in
+        inputCityIDNetworkTrigger.bind { [weak self] value in
             guard let self else { return }
+            cityID = value == "" ? seoul : value
             callRequest()
         }
     }
     
     private func callRequest() {
         // 네트워크 통신 (도시 ID + 현재 날씨)
-        NetworkManager.shared.request(api: .currentCityID(id: "1846266"), model: WeatherResponse.self) { [weak self] result in
+        NetworkManager.shared.request(api: .currentCityID(id: cityID), model: WeatherResponse.self) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let data):
@@ -37,7 +41,7 @@ final class MainViewModel: BaseViewModel {
         }
         
         // 네트워크 통신 (도시 ID + 예보)
-        NetworkManager.shared.request(api: .forecastCityID(id: "1846266"), model: ForecastResponse.self) { [weak self] result in
+        NetworkManager.shared.request(api: .forecastCityID(id: cityID), model: ForecastResponse.self) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let data):

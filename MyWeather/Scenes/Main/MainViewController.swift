@@ -13,7 +13,7 @@ final class MainViewController: BaseViewController<MainView, MainViewModel> {
     override func viewDidLoad() {
         super.viewDidLoad()
         baseView.delegate = self
-        viewModel.inputViewDidLoadTrigger.value = ()
+        viewModel.inputCityIDNetworkTrigger.value = ""
     }
     
     override func configureView() {
@@ -87,6 +87,10 @@ extension MainViewController: MainViewDelegate {
     
     func cityButtonTapped() {
         let vc = CityViewController(view: CityView(), viewModel: CityViewModel())
+        vc.sendCityID = { [weak self] cityID in
+            guard let self else { return }
+            viewModel.inputCityIDNetworkTrigger.value = cityID
+        }
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -14,9 +14,11 @@ final class CityViewModel: BaseViewModel {
     // Input
     var inputViewDidLoad: Observable<Void?> = Observable(nil)
     var inputSearchBarDidChange = Observable("")
+    var inputDidSelectItemAt: Observable<Int?> = Observable(nil)
     
     // Output
     var outputList: Observable<[City]> = Observable([])
+    var outputCityID = Observable("")
     
     override func transform() {
         inputViewDidLoad.bind { [weak self] value in
@@ -29,10 +31,14 @@ final class CityViewModel: BaseViewModel {
             }
         }
         
-        inputSearchBarDidChange.bind { [weak self] value in
+        inputSearchBarDidChange.bind { [weak self] text in
             guard let self else { return }
-            search(value)
-            print(value, outputList.value.count)
+            search(text)
+        }
+        
+        inputDidSelectItemAt.bind { [weak self] index in
+            guard let self, let index else { return }
+            outputCityID.value = String(outputList.value[index].id)
         }
     }
     
