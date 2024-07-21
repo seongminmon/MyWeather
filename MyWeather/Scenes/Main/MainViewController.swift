@@ -76,13 +76,15 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
         
         let data = viewModel.outputForeCastDayList.value[indexPath.row]
         cell.configureCell(data: data)
+        cell.selectionStyle = .none
         return cell
     }
 }
 
 extension MainViewController: MainViewDelegate {
     func mapButtonTapped() {
-        print(#function)
+        let vc = SelectMapViewController(view: SelectMapView(), viewModel: SelectMapViewModel())
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func cityButtonTapped() {

@@ -42,6 +42,9 @@
 		2466E3932C45498D00D675B2 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3922C45498D00D675B2 /* MainViewModel.swift */; };
 		2466E3952C4549FC00D675B2 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2466E3942C4549FC00D675B2 /* Observable.swift */; };
 		2466E3A22C46365200D675B2 /* CityList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2466E3A12C46365200D675B2 /* CityList.json */; };
+		24BB369E2C4D3CD000B40E9C /* SelectMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BB369D2C4D3CD000B40E9C /* SelectMapViewController.swift */; };
+		24BB36A02C4D3CE700B40E9C /* SelectMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BB369F2C4D3CE700B40E9C /* SelectMapView.swift */; };
+		24BB36A22C4D3CEC00B40E9C /* SelectMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24BB36A12C4D3CEC00B40E9C /* SelectMapViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +81,9 @@
 		2466E3922C45498D00D675B2 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		2466E3942C4549FC00D675B2 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		2466E3A12C46365200D675B2 /* CityList.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = CityList.json; sourceTree = "<group>"; };
+		24BB369D2C4D3CD000B40E9C /* SelectMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMapViewController.swift; sourceTree = "<group>"; };
+		24BB369F2C4D3CE700B40E9C /* SelectMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMapView.swift; sourceTree = "<group>"; };
+		24BB36A12C4D3CEC00B40E9C /* SelectMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMapViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +201,7 @@
 			children = (
 				2466E37F2C429AD000D675B2 /* Main */,
 				242C633B2C4BDF6A00C7B229 /* City */,
+				24BB369C2C4D3C1100B40E9C /* SelectMap */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -228,6 +235,16 @@
 				2466E3882C451BF500D675B2 /* NetworkManager.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		24BB369C2C4D3C1100B40E9C /* SelectMap */ = {
+			isa = PBXGroup;
+			children = (
+				24BB369D2C4D3CD000B40E9C /* SelectMapViewController.swift */,
+				24BB369F2C4D3CE700B40E9C /* SelectMapView.swift */,
+				24BB36A12C4D3CEC00B40E9C /* SelectMapViewModel.swift */,
+			);
+			path = SelectMap;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,14 +348,17 @@
 				2466E3502C4155C000D675B2 /* MainViewController.swift in Sources */,
 				2466E3902C45443C00D675B2 /* ForecastResponse.swift in Sources */,
 				2466E3932C45498D00D675B2 /* MainViewModel.swift in Sources */,
+				24BB369E2C4D3CD000B40E9C /* SelectMapViewController.swift in Sources */,
 				242C632F2C4A53C600C7B229 /* Format.swift in Sources */,
 				2466E34C2C4155C000D675B2 /* AppDelegate.swift in Sources */,
 				2466E3782C4298A200D675B2 /* BaseCollectionViewCell.swift in Sources */,
 				2466E3622C41566900D675B2 /* APIKey.swift in Sources */,
+				24BB36A02C4D3CE700B40E9C /* SelectMapView.swift in Sources */,
 				2466E3712C4297DB00D675B2 /* BaseViewController.swift in Sources */,
 				2466E37D2C429A8300D675B2 /* ContainerView.swift in Sources */,
 				2466E34E2C4155C000D675B2 /* SceneDelegate.swift in Sources */,
 				2466E37A2C429A6000D675B2 /* BaseView.swift in Sources */,
+				24BB36A22C4D3CEC00B40E9C /* SelectMapViewModel.swift in Sources */,
 				242C633F2C4BDFA400C7B229 /* CityViewModel.swift in Sources */,
 				242C633D2C4BDF9D00C7B229 /* CityView.swift in Sources */,
 			);
