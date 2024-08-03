@@ -57,18 +57,13 @@ final class MainView: BaseView {
     private let collectionViewLayout = UICollectionViewFlowLayout().then {
         let sectionSpacing: CGFloat = 10
         let cellSpacing: CGFloat = 10
-        
-        // 셀 사이즈
         let width: CGFloat = 50
         let height: CGFloat = 120
+        
         $0.itemSize = CGSize(width: width, height: height)
-        // 스크롤 방향
         $0.scrollDirection = .horizontal
-        // 셀 사이 거리 (가로)
         $0.minimumInteritemSpacing = cellSpacing
-        // 셀 사이 거리 (세로)
         $0.minimumLineSpacing = cellSpacing
-        // 섹션 인셋
         $0.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
     }
     
@@ -82,7 +77,7 @@ final class MainView: BaseView {
     }
     
     private let dayContainerView = ContainerView().then {
-        $0.configureLabel(imageName: "calendar", text: "  5일 간의 일기예보")
+        $0.configureLabel(imageName: "calendar", text: " 5일 간의 일기예보")
     }
     
     let tableView = UITableView().then {
@@ -279,10 +274,6 @@ final class MainView: BaseView {
         }
     }
     
-    override func configureView() {
-        backgroundImageView.image = UIImage(named: "cloud")
-    }
-    
     override func configureNavigationBar(_ vc: UIViewController) {
         // 툴바 설정
         let mapButton = UIBarButtonItem(image: UIImage(systemName: "map"), style: .plain, target: self, action: #selector(mapButtonTapped))
@@ -310,8 +301,9 @@ final class MainView: BaseView {
         guard let data else { return }
         cityNameLabel.text = data.cityName
         temparatureLabel.text = data.temp
-        weatherDescriptionLabel.text = data.description
+        weatherDescriptionLabel.text = data.description.rawValue
         temparatureDescriptionLabel.text = data.tempDescription
+        backgroundImageView.image = UIImage(named: data.description.imageName)
         
         // center를 중심으로 이동
         let center = CLLocationCoordinate2D(latitude: data.coord.lat, longitude: data.coord.lon)

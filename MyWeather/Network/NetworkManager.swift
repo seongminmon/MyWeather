@@ -13,7 +13,7 @@ final class NetworkManager {
     private init() {}
     
     func request<T: Decodable>(
-        api: NetworkRequest,
+        api: NetworkRouter,
         model: T.Type,
         completionHandler: @escaping (Result<T, AFError>) -> Void
     ) {

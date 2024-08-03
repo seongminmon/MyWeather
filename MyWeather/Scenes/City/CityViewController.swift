@@ -9,7 +9,6 @@ import UIKit
 
 final class CityViewController: BaseViewController<CityView, CityViewModel> {
     
-    // 역값 전달을 위한 클로저
     var sendCityID: ((String) -> Void)?
     
     override func viewDidLoad() {

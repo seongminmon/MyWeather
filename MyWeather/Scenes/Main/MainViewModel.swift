@@ -96,8 +96,8 @@ final class MainViewModel: BaseViewModel {
         return WeatherOutput(
             cityName: data.name,
             temp: " \(temp)°",
-            description: data.weather.first!.description,
-            tempDescription: "최고: \(tempMax)° | 최저: \(tempMin)°", 
+            description: WeatherDescription(rawValue: data.weather.first!.description) ?? .clear,
+            tempDescription: "최고: \(tempMax)° | 최저: \(tempMin)°",
             coord: data.coord,
             wind: "\(data.wind.speed)m/s",
             cloud: "\(data.clouds.all)%",

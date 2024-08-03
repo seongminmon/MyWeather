@@ -50,7 +50,6 @@ final class SelectMapView: BaseView {
         delegate?.mapViewTapped(coord: coordinate)
     }
     
-    // TODO: - 모듈화 해보기
     private func setAnnotation(_ coordinate: CLLocationCoordinate2D) {
         // 기존 annotaion 삭제
         mapView.removeAnnotations(mapView.annotations)
