@@ -83,10 +83,12 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MainViewController: MainViewDelegate {
     func mapButtonTapped() {
-        let vc = SelectMapViewController(view: SelectMapView(), viewModel: SelectMapViewModel())
+        let vm = SelectMapViewModel()
         if let coord = viewModel.outputWeather.value?.coord {
-            vc.startCoord = CLLocationCoordinate2D(latitude: coord.lat, longitude: coord.lon)
+            vm.outputStartCoord.value = CLLocationCoordinate2D(latitude: coord.lat, longitude: coord.lon)
         }
+        let vc = SelectMapViewController(view: SelectMapView(), viewModel: vm)
+        
         vc.sendCoordinate = { [weak self] coord in
             guard let self else { return }
             viewModel.inputCoordNetworkTrigger.value = Coord(lon: coord.longitude, lat: coord.latitude)
