@@ -12,9 +12,7 @@ struct WeatherOutput {
     let temp: String
     let description: WeatherDescription
     let tempDescription: String
-    
     let coord: Coord
-    
     let wind: String
     let cloud: String
     let barometer: String

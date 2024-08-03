@@ -14,7 +14,7 @@ final class CityViewModel: BaseViewModel {
     // Input
     var inputViewDidLoad: Observable<Void?> = Observable(nil)
     var inputSearchBarDidChange = Observable("")
-    var inputDidSelectItemAt: Observable<Int?> = Observable(nil)
+    var inputDidSelectItemAt: Observable<City?> = Observable(nil)
     
     // Output
     var outputList: Observable<[City]> = Observable([])
@@ -36,9 +36,9 @@ final class CityViewModel: BaseViewModel {
             search(text)
         }
         
-        inputDidSelectItemAt.bind { [weak self] index in
-            guard let self, let index else { return }
-            outputCityID.value = String(outputList.value[index].id)
+        inputDidSelectItemAt.bind { [weak self] value in
+            guard let self, let value else { return }
+            outputCityID.value = String(value.id)
         }
     }
     

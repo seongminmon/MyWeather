@@ -44,6 +44,7 @@ extension CityViewController: UISearchBarDelegate {
 
 extension CityViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.inputDidSelectItemAt.value = indexPath.item
+        let value = baseView.dataSource.itemIdentifier(for: indexPath)
+        viewModel.inputDidSelectItemAt.value = value
     }
 }
