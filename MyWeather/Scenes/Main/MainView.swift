@@ -163,7 +163,8 @@ final class MainView: BaseView {
         }
         
         contentView.snp.makeConstraints {
-            $0.width.verticalEdges.equalToSuperview()
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
         }
         
         weatherView.snp.makeConstraints {

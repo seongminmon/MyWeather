@@ -503,6 +503,7 @@
 				DEVELOPMENT_TEAM = Z6H2JVV9PA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyWeather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CityWeather;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -535,6 +536,7 @@
 				DEVELOPMENT_TEAM = Z6H2JVV9PA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MyWeather/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CityWeather;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
