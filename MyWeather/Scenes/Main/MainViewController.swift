@@ -16,6 +16,11 @@ final class MainViewController: BaseViewController<MainView, MainViewModel> {
         viewModel.inputCityIDNetworkTrigger.value = Seoul.cityID
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setToolbarHidden(false, animated: false)
+    }
+    
     override func configureView() {
         baseView.configureNavigationBar(self)
         baseView.collectionView.delegate = self

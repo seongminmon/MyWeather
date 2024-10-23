@@ -125,7 +125,7 @@ final class MainView: BaseView {
         $0.font = .systemFont(ofSize: 24)
     }
     
-    var delegate: MainViewDelegate?
+    weak var delegate: MainViewDelegate?
     
     override func addSubviews() {
         addSubview(backgroundImageView)
@@ -275,6 +275,8 @@ final class MainView: BaseView {
     }
     
     override func configureNavigationBar(_ vc: UIViewController) {
+        vc.navigationController?.navigationBar.tintColor = .white
+        
         // 툴바 설정
         let mapButton = UIBarButtonItem(image: UIImage(systemName: "map"), style: .plain, target: self, action: #selector(mapButtonTapped))
         let cityButton = UIBarButtonItem(image: UIImage(systemName: "list.bullet"), style: .plain, target: self, action: #selector(cityButtonTapped))

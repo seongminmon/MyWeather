@@ -35,6 +35,7 @@ final class CityView: BaseView {
     
     override func configureNavigationBar(_ vc: UIViewController) {
         vc.navigationItem.title = "도시 검색"
+        vc.navigationController?.setToolbarHidden(true, animated: false)
     }
     
     override func addSubviews() {

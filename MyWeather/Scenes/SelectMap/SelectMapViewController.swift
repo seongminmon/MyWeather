@@ -14,6 +14,7 @@ final class SelectMapViewController: BaseViewController<SelectMapView, SelectMap
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        baseView.configureNavigationBar(self)
         viewModel.inputViewDidLoad.value = ()
     }
     

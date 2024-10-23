@@ -26,8 +26,12 @@ final class SelectMapView: BaseView {
     
     override func configureLayout() {
         mapView.snp.makeConstraints {
-            $0.edges.equalTo(safeAreaLayoutGuide)
+            $0.edges.equalToSuperview()
         }
+    }
+    
+    override func configureNavigationBar(_ vc: UIViewController) {
+        vc.navigationController?.setToolbarHidden(true, animated: false)
     }
     
     override func configureView() {
