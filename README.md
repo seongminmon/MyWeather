@@ -31,13 +31,17 @@
 
 ### MVVM 아키텍처
 - Custom Observable을 통한 Input / Output 패턴 사용
-- baseURL, parameters 등으로 구성된 Custom 라우터 패턴을 사용해 네트워크 통신 관리
 - View와 ViewModel을 주입 받는 Generic 타입의 BaseViewController 사용
 - DI를 통한 의존성 분리
 
+### 네트워크
+- baseURL, parameters 등으로 구성된 Custom 라우터 패턴을 사용해 네트워크 통신 관리
+- API 모델과 Presentation 모델을 구분
+- ViewModel에서 API 모델에서 Presentation 모델로 변환하여 사용
+
 ### UI
-- UIVisualEffectView를 사용한 자연스러운 UI 구현
-- UIScrollView내에 CollectionView와 TableView 구현
+- UIVisualEffectView를 활용한 자연스러운 UI 구현
+- StackView를 CollectionView와 TableView로 리팩토링하여 중복되는 UI 인스턴스 감소
 
 ### Local Json
 - 도시 리스트를 Local Json 파일로 관리
